@@ -1,0 +1,39 @@
+{
+    "name": "miladimos/laravel-repository",
+    "description": "a powerful and simple to use package for repository pattern",
+    "homepage": "https://github.com/miladimos/laravel-repository",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "laravel-package",
+        "laravel-repository",
+        "laravel support",
+        "lumen packages",
+        "laravel packages",
+        "lumen support",
+        "slug"
+    ],
+    "authors": [
+        {
+            "name": "miladimos",
+            "email": "message.tome1331@gmail.com",
+            "role": "maintaner",
+            "homepage": "https://github.com/miladimos"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Miladimos\\Repository\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Miladimos\\Repository\\Providers\\RepositoryServiceProvider"
+            ]
+        }
+    },
+    "require": {},
+    "license": "MIT"
+}
+
