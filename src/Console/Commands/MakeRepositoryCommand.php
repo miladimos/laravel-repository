@@ -11,7 +11,7 @@ class MakeRepositoryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:repository';
+    protected $signature = 'make:repository {model}';
 
     /**
      * The console command description.
