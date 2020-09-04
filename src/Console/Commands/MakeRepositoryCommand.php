@@ -11,7 +11,8 @@ class MakeRepositoryCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:repository {model}';
+    protected $signature = "make:repository
+                            {model : Model's Name}";
 
     /**
      * The console command description.
@@ -37,7 +38,11 @@ class MakeRepositoryCommand extends Command
      */
     public function handle()
     {
+
         $this->info('Command Working');
+        $modelName = $this->argument('model');
+        $this->info("Model Name: {$modelName}");
+
         return 0;
     }
 }
