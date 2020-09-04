@@ -3,6 +3,7 @@
 namespace Miladimos\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Miladimos\Repository\Console\Commands\MakeRepositoryCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../../config/config.php' => config_path('repository.php')
             ],'repository-config');
+
+            $this->commands([
+                MakeRepositoryCommand::class
+            ]);
         }
     }
 
