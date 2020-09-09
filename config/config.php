@@ -10,7 +10,7 @@ return [
         /*
          *  Path that contains Repositories
          * */
-        'repositories' => 'Repositories',
+        'namespace' => 'Repositories',
 
         /*
          * Suffix for Created Repositories

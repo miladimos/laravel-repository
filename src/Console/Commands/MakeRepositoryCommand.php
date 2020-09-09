@@ -2,17 +2,28 @@
 
 namespace Miladimos\Repository\Console\Commands;
 
-use Illuminate\Console\Command;
 
-class MakeRepositoryCommand extends Command
+use Illuminate\Console\GeneratorCommand;
+
+class MakeRepositoryCommand extends GeneratorCommand
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
+
+//
+//    /**
+//     * Create a new command instance.
+//     *
+//     * @return void
+//     */
+//    public function __construct()
+//    {
+//        parent::__construct();
+//    }
+//
+
     protected $signature = "make:repository
-                            { model : Model Name}";
+                           { model? : Model Name}";
+
+    protected $name = 'Repository';
 
     /**
      * The console command description.
@@ -21,28 +32,59 @@ class MakeRepositoryCommand extends Command
      */
     protected $description = 'Make New Repository';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    protected $type = 'Repository';
+
+
+    protected function getStub()
     {
-        parent::__construct();
+        return __DIR__ . '/../Stubs/repository.stub';
     }
 
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        $repositoryNamespace = config('repository.namespace');
+        return $rootNamespace . "\\$repositoryNamespace";
+    }
 
+    protected function getNameInput()
+    {
+        return $this->option('model');
+    }
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
-        $this->info('Command Working');
-        $modelName = $this->argument('model');
-        $this->info("Model Name: {$modelName}");
-        return 0;
+        parent::handle();
+
+        $this->createRepository();
     }
+
+    protected function createRepository()
+    {
+        // Get the fully qualified class name (FQN)
+        $class = $this->qualifyClass($this->getNameInput());
+
+        // get the destination path, based on the default namespace
+        $path = $this->getPath($class);
+
+        $content = file_get_contents($path);
+
+        // Update the file content with additional data (regular expressions)
+
+        file_put_contents($path, $content);
+    }
+
+
+//    /**
+//     * Execute the console command.
+//     *
+//     * @return int
+//     */
+//    public function handle()
+//    {
+//        $this->info('Command Working');
+//        $modelName = $this->argument('model');
+//        $this->info("Model Name: {$modelName}");
+//        return 0;
+//    }
 }

@@ -16,7 +16,10 @@ interface IBaseRepositoryInterface
 
     public function findOrFail($id);
 
+    public function findWhere(string $field, $condition, $columns);
+
     public function delete();
 
+    public function count() : int;
 
 }

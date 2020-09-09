@@ -1,8 +1,13 @@
 <?php
 namespace App\Repository;
 
+use Miladimos\Repositories\BaseRepository;
+
 class DummyClass extends BaseRepository {
+
     public function __construct() {
         $model = '';
     }
+
+    
 }

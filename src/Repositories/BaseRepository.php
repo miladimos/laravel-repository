@@ -10,12 +10,12 @@ class BaseRepository implements IBaseRepositoryInterface
 
     public function __construct($model)
     {
-        $this->model = $model;
+        return $this->model = $model;
     }
 
     public function all(): object
     {
-        // TODO: Implement all() method.
+        return $this->model->all();
     }
 
     public function create(array $data)
@@ -25,12 +25,12 @@ class BaseRepository implements IBaseRepositoryInterface
 
     public function update(array $data)
     {
-        // TODO: Implement update() method.
+        return $this->model->update($data);
     }
 
     public function find($id): object
     {
-        // TODO: Implement find() method.
+        return $this->find($id);
     }
 
     public function findOrFail($id)
@@ -40,6 +40,21 @@ class BaseRepository implements IBaseRepositoryInterface
 
     public function delete()
     {
-        // TODO: Implement delete() method.
+        return $this->model->delete();
+    }
+
+    public function findWhere(string $field, $condition, $columns)
+    {
+        return $this->model->where($field, $columns, $columns);
+    }
+
+    /**
+     * Count the number of specified model records in the database.
+     *
+     * @return int
+     */
+    public function count() : int
+    {
+        return $this->model->get()->count();
     }
 }
