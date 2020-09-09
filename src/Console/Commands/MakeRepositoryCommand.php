@@ -12,14 +12,14 @@ class MakeRepositoryCommand extends Command
      * @var string
      */
     protected $signature = "make:repository
-                            {model : Model's Name}";
+                            { model : Model Name}";
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Make New Repository Pattern Files';
+    protected $description = 'Make New Repository';
 
     /**
      * Create a new command instance.
@@ -31,6 +31,8 @@ class MakeRepositoryCommand extends Command
         parent::__construct();
     }
 
+
+
     /**
      * Execute the console command.
      *
@@ -38,11 +40,9 @@ class MakeRepositoryCommand extends Command
      */
     public function handle()
     {
-
         $this->info('Command Working');
         $modelName = $this->argument('model');
         $this->info("Model Name: {$modelName}");
-
         return 0;
     }
 }

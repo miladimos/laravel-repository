@@ -7,6 +7,8 @@ use Miladimos\Repository\Console\Commands\MakeRepositoryCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
+
+
     /**
      * Register services.
      *
@@ -30,8 +32,9 @@ class RepositoryServiceProvider extends ServiceProvider
             ],'repository-config');
 
             $this->commands([
-                MakeRepositoryCommand::class
+                MakeRepositoryCommand::class,
             ]);
+
         }
     }
 

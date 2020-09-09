@@ -10,8 +10,15 @@ return [
         /*
          *  Path that contains Repositories
          * */
-        'repositories' => 'Repositories'
+        'repositories' => 'Repositories',
 
+        /*
+         * Suffix for Created Repositories
+         *
+         * ex: $modelNameRepository
+         *
+         * */
+        'suffix' => 'Repository'
 
 
     ]
