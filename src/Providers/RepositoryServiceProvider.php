@@ -4,6 +4,7 @@ namespace Miladimos\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Miladimos\Repository\Console\Commands\MakeRepositoryCommand;
+use Miladimos\Repository\Repository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,10 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . "/../../config/config.php", 'repository');
+
+        $this->app->bind('repository', function($app) {
+            return new Repository();
+        });
     }
 
     /**

@@ -35,7 +35,10 @@
         "laravel": {
             "providers": [
                 "Miladimos\\Repository\\Providers\\RepositoryServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Repository": "Miladimos\\Repository\\Facades\\RepositoryFacade"
+            }
         }
     },
     "require": {},
