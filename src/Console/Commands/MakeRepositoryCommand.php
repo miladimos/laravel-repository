@@ -3,9 +3,10 @@
 namespace Miladimos\Repository\Console\Commands;
 
 
-use Illuminate\Console\GeneratorCommand;
+use Illuminate\Console\Command;
+use Miladimos\Repository\Repository;
 
-class MakeRepositoryCommand extends GeneratorCommand
+class MakeRepositoryCommand extends Command
 {
 
 //
@@ -33,59 +34,21 @@ class MakeRepositoryCommand extends GeneratorCommand
     protected $description = 'Make New Repository';
 
 
-    protected $type = 'Repository';
-
-
-    protected function getStub()
-    {
-        return __DIR__ . '/../Stubs/repository.stub';
-    }
-
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        $repositoryNamespace = config('repository.namespace');
-        return $rootNamespace . "\\$repositoryNamespace";
-    }
-
-    protected function getNameInput()
-    {
-        return $this->option('model');
-    }
-
-//    public function handle()
-//    {
-//        parent::handle();
-//
-//        $this->createRepository();
-//    }
-//
-//    protected function createRepository()
-//    {
-//        // Get the fully qualified class name (FQN)
-//        $class = $this->qualifyClass($this->getNameInput());
-//
-//        // get the destination path, based on the default namespace
-//        $path = $this->getPath($class);
-//
-//        $content = file_get_contents($path);
-//
-//        // Update the file content with additional data (regular expressions)
-//
-//        file_put_contents($path, $content);
-//    }
-
-
-//    /**
-//     * Execute the console command.
-//     *
-//     * @return int
-//     */
     public function handle()
     {
-        $this->info('Command Working');
         $modelName = $this->argument('model');
 
-        $this->info("Model Name: {$modelName}");
+        $this->warn("Repository {$modelName} is creating ...");
+
+        try {
+            Repository::make($modelName);
+            
+            $this->info("Repository Model: {$modelName} is created successfully.");
+        }catch (\Exception $exception) {
+            $this->error('Error');
+        }
+
+
         return 0;
     }
 }
