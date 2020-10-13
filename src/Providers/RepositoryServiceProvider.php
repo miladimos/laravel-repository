@@ -19,9 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . "/../../config/config.php", 'repository');
 
-        $this->app->bind('repository', function($app) {
-            return new Repository();
-        });
+        $this->registerFacades();
     }
 
     /**
@@ -31,16 +29,33 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../../config/config.php' => config_path('repository.php')
-            ],'repository-config');
+        if ($this->app->runningInConsole()) {
 
-            $this->commands([
-                MakeRepositoryCommand::class,
-            ]);
+            $this->registerPublishes();
+
+            $this->registerCommands();
 
         }
     }
 
+    private function registerFacades()
+    {
+        $this->app->bind('repository', function ($app) {
+            return new Repository();
+        });
+    }
+
+    private function registerPublishes()
+    {
+        $this->publishes([
+            __DIR__ . '/../../config/config.php' => config_path('repository.php')
+        ], 'repository-config');
+    }
+
+    public function registerCommands()
+    {
+        $this->commands([
+            MakeRepositoryCommand::class,
+        ]);
+    }
 }
