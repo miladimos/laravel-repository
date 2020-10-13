@@ -10,7 +10,7 @@ interface IBaseRepositoryInterface
 
     public function create(array $data);
 
-    public function update(array $data);
+    public function update(array $data, int $id);
 
     public function find($id) : object ;
 
@@ -18,7 +18,7 @@ interface IBaseRepositoryInterface
 
     public function findWhere(string $field, $condition, $columns);
 
-    public function delete();
+    public function delete(int $id);
 
     public function count() : int;
 

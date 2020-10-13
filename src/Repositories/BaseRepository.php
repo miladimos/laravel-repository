@@ -4,14 +4,18 @@
 namespace Miladimos\Repository\Repositories;
 
 
-class BaseRepository implements IBaseRepositoryInterface
+use Illuminate\Database\Eloquent\Model;
+
+abstract class BaseRepository implements IBaseRepositoryInterface
 {
     protected $model;
 
-    public function __construct($model)
+    public function __construct(Model $model)
     {
         return $this->model = $model;
     }
+
+    abstract function model();
 
     public function all(): object
     {
@@ -23,9 +27,17 @@ class BaseRepository implements IBaseRepositoryInterface
         // TODO: Implement create() method.
     }
 
-    public function update(array $data)
+    public function update(array $data, $id)
     {
-        return $this->model->update($data);
+        $record = $this->find($id);
+        return $record->update($data);
+
+//        $result = $this->find($id);
+//        if($result) {
+//            $result->update($attributes);
+//            return $result;
+//        }
+//        return false;
     }
 
     public function find($id): object
@@ -33,14 +45,19 @@ class BaseRepository implements IBaseRepositoryInterface
         return $this->find($id);
     }
 
+
     public function findOrFail($id)
     {
-        // TODO: Implement findOrFail() method.
+        return $this->findOrFail($id);
     }
 
-    public function delete()
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function delete($id)
     {
-        return $this->model->delete();
+        return $this->delete($id);
     }
 
     public function findWhere(string $field, $condition, $columns)
@@ -56,5 +73,24 @@ class BaseRepository implements IBaseRepositoryInterface
     public function count() : int
     {
         return $this->model->get()->count();
+    }
+
+    // Eager load database relationships
+    public function with($relations)
+    {
+        return $this->model->with($relations);
+    }
+
+    // Get the associated model
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    // Set the associated model
+    public function setModel($model)
+    {
+        $this->model = $model;
+        return $this;
     }
 }
