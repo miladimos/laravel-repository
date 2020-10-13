@@ -35,6 +35,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
             $this->registerCommands();
 
+//            $this->loadViewsFrom(__DIR__.'/resources/stubs', 'RepositoryPattern');
+//
+
+
         }
     }
 
@@ -50,6 +54,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/config.php' => config_path('repository.php')
         ], 'repository-config');
+
+//        $this->publishes([
+//            __DIR__.'/resources/stubs' => resource_path('vendor/salmanzafar/stubs'),
+//        ]);
     }
 
     public function registerCommands()
