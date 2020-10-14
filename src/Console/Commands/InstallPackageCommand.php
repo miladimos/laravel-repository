@@ -23,11 +23,7 @@ class InstallPackageCommand extends Command
 
     public function handle()
     {
-        $this->warn("Repository Package installing started ...");
-
-        $bar = $this->output->createProgressBar(100);
-
-        $bar->start();
+        $this->warn("Repository Package installing started...");
 
         try {
             $this->call('vendor:publish', [
@@ -44,8 +40,6 @@ class InstallPackageCommand extends Command
         }catch (\Exception $exception) {
             $this->error($exception);
         }
-
-        $bar->finish();
 
         return 0;
     }
