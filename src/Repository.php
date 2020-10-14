@@ -56,7 +56,6 @@ class Repository
         );
 
         file_put_contents(base_path("/App/Repositories/{$name}Repository.php"), $template);
-
     }
 
     protected static function createProvider()
