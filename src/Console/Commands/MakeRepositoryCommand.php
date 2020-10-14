@@ -9,18 +9,6 @@ use Miladimos\Repository\Repository;
 class MakeRepositoryCommand extends Command
 {
 
-//
-//    /**
-//     * Create a new command instance.
-//     *
-//     * @return void
-//     */
-//    public function __construct()
-//    {
-//        parent::__construct();
-//    }
-//
-
     protected $signature = "make:repository
                            { model : Model Name}";
 
@@ -41,11 +29,12 @@ class MakeRepositoryCommand extends Command
         $this->warn("Repository {$modelName} is creating ...");
 
         try {
-            Repository::make($modelName);
-            
-            $this->info("Repository Model: {$modelName} is created successfully.");
+            if(Repository::make($modelName))
+                $this->info("Repository Model: {$modelName} is created successfully.");
+            else
+                $this->error('Error in Creating Repository!');
         }catch (\Exception $exception) {
-            $this->error('Error');
+            $this->error($exception);
         }
 
 

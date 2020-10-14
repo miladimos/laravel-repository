@@ -1,13 +1,12 @@
 <?php
-namespace App\Repository;
+namespace App\Repositories;
 
-use Miladimos\Repositories\BaseRepository;
+use Miladimos\Repository\Repositories\BaseRepository;
 
-class $modelNameRepository extends BaseRepository {
+class {{$modelName}}Repository extends BaseRepository {
 
-    public function __construct() {
-        return $model = $modelName::class;
+    public function model() {
+        return {{$modelName}}::class;
     }
-
 
 }

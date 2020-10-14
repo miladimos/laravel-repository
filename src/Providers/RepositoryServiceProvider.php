@@ -9,7 +9,7 @@ use Miladimos\Repository\Repository;
 class RepositoryServiceProvider extends ServiceProvider
 {
 
-
+    public static $packagePath = null;
     /**
      * Register services.
      *
@@ -29,15 +29,13 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        self::$packagePath = dirname(__DIR__);
+
         if ($this->app->runningInConsole()) {
 
             $this->registerPublishes();
 
             $this->registerCommands();
-
-//            $this->loadViewsFrom(__DIR__.'/resources/stubs', 'RepositoryPattern');
-//
-
 
         }
     }
@@ -55,9 +53,9 @@ class RepositoryServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/config.php' => config_path('repository.php')
         ], 'repository-config');
 
-//        $this->publishes([
-//            __DIR__.'/resources/stubs' => resource_path('vendor/salmanzafar/stubs'),
-//        ]);
+        $this->publishes([
+            __DIR__.'/../Console/Stubs' => resource_path('vendor/miladimos/repository/stubs'),
+        ], 'repository-stubs');
     }
 
     public function registerCommands()

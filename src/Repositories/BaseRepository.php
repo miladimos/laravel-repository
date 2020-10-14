@@ -24,7 +24,7 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 
     public function create(array $data)
     {
-        // TODO: Implement create() method.
+        return $this->create($data);
     }
 
     public function update(array $data, $id)
