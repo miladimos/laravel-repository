@@ -3,6 +3,7 @@
 namespace Miladimos\Repository\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Miladimos\Repository\Console\Commands\InstallPackageCommand;
 use Miladimos\Repository\Console\Commands\MakeRepositoryCommand;
 use Miladimos\Repository\Repository;
 
@@ -61,6 +62,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function registerCommands()
     {
         $this->commands([
+            InstallPackageCommand::class,
             MakeRepositoryCommand::class,
         ]);
     }
