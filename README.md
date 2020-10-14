@@ -4,15 +4,15 @@
 
 - [English](README-en.md)
 
-### برای نصب دستور زیر را در ریشه پروژه اجرا کنید 
+### برای نصب در مسیر روت پروژه خود دستور زیر را در ریشه پروژه اجرا کنید 
 
 ``composer require miladimos/laravel-repository``
 
-### قبل از ایجاد ریپازیتوری فایل های کانفیگ پکیچ رو ایجاد کنید 
+### برای نصب فایل های پکیج از دستور زیر استفاده کنید 
 
-``php artisan vendor:publish --tag=repository-config``
+``php artisan repository:install``
+
 
 ### برای ایجاد یک ریپازیتوری از دستور زیر استفاده کنید 
 
 ``php artisan make:repository {ModelName}``
-

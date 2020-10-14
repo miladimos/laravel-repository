@@ -30,7 +30,6 @@ class InstallPackageCommand extends Command
             $this->error($exception);
         }
 
-
         return 0;
     }
 }
