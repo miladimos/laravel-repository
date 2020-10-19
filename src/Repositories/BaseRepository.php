@@ -12,7 +12,8 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 
     public function __construct(Model $model)
     {
-        return $this->model = $model;
+        if ($model instanceof Model)
+            $this->model = $model;
     }
 
     abstract function model();

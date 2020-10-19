@@ -4,7 +4,7 @@
 namespace Miladimos\Repository\Tests;
 
 
-use Miladimos\Repository\Providers\RepositoryServiceProvider;
+use Miladimos\Repository\Providers\SocialServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -16,7 +16,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            RepositoryServiceProvider::class,
+            SocialServiceProvider::class,
         ];
     }
 

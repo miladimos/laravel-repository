@@ -34,7 +34,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Miladimos\\Repository\\Providers\\RepositoryServiceProvider"
+              "SocialServiceProvider"
             ],
             "aliases": {
                 "Repository": "Miladimos\\Repository\\Facades\\RepositoryFacade"
