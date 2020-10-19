@@ -8,7 +8,7 @@ class RepositoryServiceProvider extends ServiceProvider
 {
 
     protected $repositories = [
-
+        Model::class,
     ];
 
     public function register()

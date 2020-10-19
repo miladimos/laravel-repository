@@ -6,3 +6,13 @@
 ## Installation
 
 ``composer require miladimos/laravel-repository``
+
+
+### For Installation run below command: 
+
+``php artisan repository:install``
+
+
+### For Create new Repository 
+
+``php artisan make:repository {ModelName}``
