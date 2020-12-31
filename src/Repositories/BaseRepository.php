@@ -10,13 +10,13 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Model $model)
+    public function __construct()
     {
-        if ($model instanceof Model)
-            $this->model = $model;
+        $this->makeModel();
     }
 
-    abstract function model();
+    public abstract function model();
+
 
     public function all(): object
     {
@@ -41,6 +41,11 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 //        return false;
     }
 
+    public function update2(array $data, $id, $attribute = "id")
+    {
+        return $this->model->where($attribute, '=', $id)->update($data);
+    }
+
     public function find($id): object
     {
         return $this->find($id);
@@ -50,6 +55,11 @@ abstract class BaseRepository implements IBaseRepositoryInterface
     public function findOrFail($id)
     {
         return $this->findOrFail($id);
+    }
+
+    public function paginate($perPage = 25, $columns = array('*'))
+    {
+        return $this->model->paginate($perPage, $columns);
     }
 
     /**
@@ -82,16 +92,36 @@ abstract class BaseRepository implements IBaseRepositoryInterface
         return $this->model->with($relations);
     }
 
+        /**
+     * @return \Illuminate\Database\Eloquent\Builder
+     * @throws RepositoryException
+     */
+    public function makeModel()
+    {
+        return $this->setModel($this->model());
+    }
+
+    /**
+     * Set Eloquent Model to instantiate
+     *
+     * @param $eloquentModel
+     * @return Model
+     * @throws RepositoryException
+     */
+    public function setModel($eloquentModel)
+    {
+        $this->newModel = $this->app->make($eloquentModel);
+
+        if (!$this->newModel instanceof Model)
+            throw new RepositoryException("Class {$this->newModel} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+
+        return $this->model = $this->newModel;
+    }
+
     // Get the associated model
     public function getModel()
     {
         return $this->model;
     }
 
-    // Set the associated model
-    public function setModel($model)
-    {
-        $this->model = $model;
-        return $this;
-    }
 }

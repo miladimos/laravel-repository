@@ -10,5 +10,11 @@ class {{$modelName}}Repository extends BaseRepository {
        parent::__construct($model);
    }
 
+    protected $model = {{$modelName}}::class;
+
+    public function model()
+    {
+        return {{$modelName}}::class;
+    }
 
 }

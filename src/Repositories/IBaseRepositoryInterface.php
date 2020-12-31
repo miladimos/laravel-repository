@@ -16,10 +16,14 @@ interface IBaseRepositoryInterface
 
     public function findOrFail($id);
 
+    public function findAllBy($field, $value, $columns = array('*'));
+
     public function findWhere(string $field, $condition, $columns);
 
     public function delete(int $id);
 
     public function count() : int;
+
+    public function paginate($perPage = 1, $columns = array('*'));
 
 }
