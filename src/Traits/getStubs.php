@@ -29,4 +29,15 @@ trait getStubs
     {
         return file_get_contents(resource_path("vendor/miladimos/repository/stubs/$type.stub"));
     }
+
+
+     /**
+   * Get path to the stubs.
+   *
+   * @return string
+   */
+  public function stubPath() {
+    return __DIR__ . '/stubs';
+  }
+
 }

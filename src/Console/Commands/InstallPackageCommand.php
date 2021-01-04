@@ -25,7 +25,6 @@ class InstallPackageCommand extends Command
     {
         $this->warn("Repository Package installing started...");
 
-
         //config
         if (File::exists(config_path('repository.php'))) {
             $confirmConfig = $this->confirm("repository.php already exist. you must overwrite it! Are you ok?");
@@ -40,6 +39,7 @@ class InstallPackageCommand extends Command
             $this->publishConfig();
             $this->info("config published");
         }
+
 
         $confirmStub = $this->confirm("Do you like publish stub files?");
         if($confirmStub) {

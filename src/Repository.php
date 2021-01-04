@@ -4,14 +4,13 @@
 namespace Miladimos\Repository;
 
 
-use Miladimos\Repository\Traits\getPaths;
 use Miladimos\Repository\Traits\getStubs;
 use Miladimos\Repository\Traits\validateModel;
-use Miladimos\Repository\Repositories\IBaseRepositoryInterface;
+use Miladimos\Repository\Traits\helpersMethods;
 
 class Repository
 {
-    use getStubs, getPaths, validateModel;
+    use getStubs, helpersMethods, validateModel;
 
 
     protected static function createRepository($name)
@@ -33,7 +32,7 @@ class Repository
             file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
     }
 
-    protected static function MakeInterface($name)
+    protected static function createInterface($name)
     {
         $template = str_replace(
             ['{{modelName}}'],
@@ -48,50 +47,14 @@ class Repository
 
     public static function make($modelName)
     {
-        if (!file_exists($path=base_path(self::NAMESPACE)))
+
+        if (!file_exists($path=(new self)->getRepositoryDefaultNamespace()))
             mkdir($path, 0777, true);
 
         self::createProvider();
-        self::MakeInterface($name);
+        self::createInterface($modelName);
         self::createRepository($modelName);
 
         return true;
     }
-
-    protected function ensureRepositoryDoesntAlreadytExist($model) {
-        if (class_exists($classFullyQualified = $this->getRepositoryNamespace($model), false)) {
-          throw new InvalidArgumentException("{$classFullyQualified} already exists.");
-        }
-      }
-
-
-       /**
-   * Get path to the stubs.
-   *
-   * @return string
-   */
-  public function stubPath() {
-    return __DIR__ . '/stubs';
-  }
-
-  /**
-   * Get the class name of the model name.
-   *
-   * @param string $model
-   * @return string
-   */
-  protected function getClassName($model) {
-    return Str::studly($model);
-  }
-
-  /**
-   * Get the repository's class name.
-   *
-   * @param string $model
-   * @return string
-   */
-  protected function getRepositoryClassName($model) {
-    $modelPrefix = config('repositories.pluralise') ? Str::plural($model) : $model;
-    return $modelPrefix . 'Repository';
-  }
 }

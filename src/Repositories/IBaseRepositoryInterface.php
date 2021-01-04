@@ -22,6 +22,8 @@ interface IBaseRepositoryInterface
 
     public function delete(int $id);
 
+    public function truncate();
+
     public function count() : int;
 
     public function paginate($perPage = 1, $columns = array('*'));
