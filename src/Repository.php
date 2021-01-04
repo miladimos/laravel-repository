@@ -4,39 +4,15 @@
 namespace Miladimos\Repository;
 
 
-use Miladimos\Repository\Repositories\IBaseRepositoryInterface;
+use Miladimos\Repository\Traits\getPaths;
 use Miladimos\Repository\Traits\getStubs;
 use Miladimos\Repository\Traits\validateModel;
+use Miladimos\Repository\Repositories\IBaseRepositoryInterface;
 
 class Repository
 {
-    use getStubs, validateModel;
-    /**
-     * @var string
-     */
-     const NAMESPACE = 'App\\Repositories';
+    use getStubs, getPaths, validateModel;
 
-    /**
-     * @var string
-     */
-    protected $base = IBaseRepositoryInterface::class;
-
-
-    protected function getDefaultNamespace($rootNamespace = "app")
-    {
-        $repositoryNamespace = config('repository.namespace');
-        return $rootNamespace . "\\$repositoryNamespace";
-    }
-
-     /**
-     * Return repository base namespace.
-     *
-     * @return string
-     */
-    protected function getRepositoryBaseNamespace()
-    {
-        return config('repositories.base_application_namespace') . '\\' . config('repositories.repositories_base_namespace');
-    }
 
     protected static function createRepository($name)
     {
