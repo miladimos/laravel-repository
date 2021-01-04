@@ -2,10 +2,11 @@
 
 return [
     'repository' => [
+
         /*
          *  Path that contains Models
          * */
-        'models' => '',
+        'models' => app_path('Models'),
 
         /*
          *  Path that contains Repositories
@@ -18,6 +19,6 @@ return [
          * ex: $modelNameRepository
          *
          * */
-        'suffix' => 'Repository'
+        'suffix' => 'Repository',
     ]
 ];
