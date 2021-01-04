@@ -4,7 +4,6 @@ namespace Miladimos\Repository\Console\Commands;
 
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
 
 class InstallPackageCommand extends Command
 {

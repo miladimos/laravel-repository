@@ -4,7 +4,6 @@
 namespace Miladimos\Repository;
 
 
-use Miladimos\Repository\Providers\SocialServiceProvider;
 use Miladimos\Repository\Repositories\IBaseRepositoryInterface;
 
 class Repository

@@ -19,7 +19,5 @@ return [
          *
          * */
         'suffix' => 'Repository'
-
-
     ]
 ];
