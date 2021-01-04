@@ -24,7 +24,7 @@ class MakeRepositoryCommand extends Command
 
     public function handle()
     {
-        $modelName = $this->argument('model');
+        $modelName = trim($this->argument('model'));
 
         $this->warn("Repository {$modelName} is creating ...");
 
@@ -33,8 +33,10 @@ class MakeRepositoryCommand extends Command
                 $this->info("Repository Model: {$modelName} is created successfully.");
             else
                 $this->error('Error in Creating Repository!');
+                die;
         }catch (\Exception $exception) {
             $this->error($exception);
+            die;
         }
 
 

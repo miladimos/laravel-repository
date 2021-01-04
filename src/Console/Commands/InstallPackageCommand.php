@@ -11,7 +11,7 @@ class InstallPackageCommand extends Command
 
     protected $signature = "repository:install";
 
-    protected $name = 'Install Package';
+    protected $name = 'Install Repository Package';
 
     /**
      * The console command description.
