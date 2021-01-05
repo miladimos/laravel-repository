@@ -4,19 +4,44 @@
 namespace Miladimos\Repository\Repositories;
 
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository implements IBaseRepositoryInterface
 {
-    protected $model;
+    private $app;
+
+    private $model;
+
+    protected $modelInstance;
 
     public function __construct()
     {
+        $this->app = app();
         $this->makeModel();
     }
 
-    public abstract function model();
+    abstract public function model();
 
+    public function makeModel()
+    {
+        return $this->setModel($this->model());
+    }
+
+    public function setModel($model)
+    {
+        $this->newInstanseModel = $this->app->make($model);
+
+        if (!$this->newInstanseModel instanceof Model)
+            throw new Exception("Class {$this->newInstanseModel} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+
+        return $this->model = $this->newInstanseModel;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
 
     public function all(): object
     {
@@ -25,20 +50,7 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 
     public function create(array $data)
     {
-        return $this->create($data);
-    }
-
-    public function update(array $data, $id)
-    {
-        $record = $this->find($id);
-        return $record->update($data);
-
-//        $result = $this->find($id);
-//        if($result) {
-//            $result->update($attributes);
-//            return $result;
-//        }
-//        return false;
+        return $this->model->create($data);
     }
 
     public function update2(array $data, $id, $attribute = "id")
@@ -48,13 +60,12 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 
     public function find($id): object
     {
-        return $this->find($id);
+        return $this->model->find($id);
     }
-
 
     public function findOrFail($id)
     {
-        return $this->findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function paginate($perPage = 25, $columns = array('*'))
@@ -62,13 +73,9 @@ abstract class BaseRepository implements IBaseRepositoryInterface
         return $this->model->paginate($perPage, $columns);
     }
 
-    /**
-     * @param int $id
-     * @return mixed
-     */
     public function delete($id)
     {
-        return $this->delete($id);
+        return $this->model->findOrFail($id)->delete();
     }
 
     public function findWhere(string $field, $condition, $columns)
@@ -76,52 +83,32 @@ abstract class BaseRepository implements IBaseRepositoryInterface
         return $this->model->where($field, $columns, $columns);
     }
 
-    /**
-     * Count the number of specified model records in the database.
-     *
-     * @return int
-     */
-    public function count() : int
+    public function count($columns = ['*']) : int
     {
-        return $this->model->get()->count();
+        return $this->model->count($columns);
+    }
+
+    public function pluck($value, $key = null)
+    {
+        $lists = $this->model->pluck($value, $key);
+
+        if (is_array($lists)) {
+            return $lists;
+        }
+
+        return $lists->all();
+    }
+
+
+    public function toSql()
+    {
+        return $this->model->toSql();
     }
 
     // Eager load database relationships
     public function with($relations)
     {
         return $this->model->with($relations);
-    }
-
-        /**
-     * @return \Illuminate\Database\Eloquent\Builder
-     * @throws RepositoryException
-     */
-    public function makeModel()
-    {
-        return $this->setModel($this->model());
-    }
-
-    /**
-     * Set Eloquent Model to instantiate
-     *
-     * @param $eloquentModel
-     * @return Model
-     * @throws RepositoryException
-     */
-    public function setModel($eloquentModel)
-    {
-        $this->newModel = $this->app->make($eloquentModel);
-
-        if (!$this->newModel instanceof Model)
-            throw new RepositoryException("Class {$this->newModel} must be an instance of Illuminate\\Database\\Eloquent\\Model");
-
-        return $this->model = $this->newModel;
-    }
-
-    // Get the associated model
-    public function getModel()
-    {
-        return $this->model;
     }
 
 }

@@ -10,7 +10,7 @@ class MakeRepositoryCommand extends Command
 {
 
     protected $signature = "make:repository
-                           { model : Model Name}";
+                           { model : Model Name }";
 
     protected $name = 'Repository';
 

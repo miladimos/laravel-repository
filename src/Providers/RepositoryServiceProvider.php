@@ -18,7 +18,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . "/../../config/config.php", 'repository');
+        $this->mergeConfigFrom(__DIR__ . "/../../config/repository.php", 'repository');
 
         $this->registerFacades();
     }
@@ -51,7 +51,7 @@ class RepositoryServiceProvider extends ServiceProvider
     private function registerPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../../config/config.php' => config_path('repository.php')
+            __DIR__ . '/../../config/repository.php' => config_path('repository.php')
         ], 'repository-config');
 
         $this->publishes([
@@ -65,5 +65,15 @@ class RepositoryServiceProvider extends ServiceProvider
             InstallPackageCommand::class,
             MakeRepositoryCommand::class,
         ]);
+    }
+
+        /**
+     * Check if package is running under Lumen app
+     *
+     * @return bool
+     */
+    protected function isLumen()
+    {
+        return str_contains($this->app->version(), 'Lumen') === true;
     }
 }

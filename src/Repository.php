@@ -38,7 +38,7 @@ class Repository
             ['{{modelName}}'],
             [$name],
 
-            self::GetStubs('RepositoryInterface')
+            self::getRepositoryInterfaceStub()
         );
 
         file_put_contents(base_path("/Repositories/{$name}RepositoryInterface.php"), $template);
@@ -51,8 +51,8 @@ class Repository
         if (!file_exists($path=(new self)->getRepositoryDefaultNamespace()))
             mkdir($path, 0777, true);
 
-        self::createProvider();
-        self::createInterface($modelName);
+        // self::createProvider();
+        // self::createInterface($modelName);
         self::createRepository($modelName);
 
         return true;

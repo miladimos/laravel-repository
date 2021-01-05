@@ -3,12 +3,10 @@ namespace App\Repositories;
 
 use Miladimos\Repository\Repositories\BaseRepository;
 
-class {{$modelName}}Repository extends BaseRepository {
+use {{ $modelNamespace }}
 
-   public function __construct({{$modelName}} $model)
-   {
-       parent::__construct($model);
-   }
+class {{$modelName}}Repository extends BaseRepository
+s{
 
     protected $model = {{$modelName}}::class;
 

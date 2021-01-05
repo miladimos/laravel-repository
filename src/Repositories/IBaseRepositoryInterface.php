@@ -3,6 +3,8 @@
 
 namespace Miladimos\Repository\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 
 interface IBaseRepositoryInterface
 {
@@ -10,7 +12,7 @@ interface IBaseRepositoryInterface
 
     public function create(array $data);
 
-    public function update(array $data, int $id);
+    public function update(Model $entity, array $attributes);
 
     public function find($id) : object ;
 
@@ -28,4 +30,15 @@ interface IBaseRepositoryInterface
 
     public function paginate($perPage = 1, $columns = array('*'));
 
+    public function search($queries);
+
+    public function pluck($value, $key = null);
+
+    public function simplePaginate($limit = null, $columns = ['*']);
+
+    public function toSql();
+
+    public function setModel(Model $model);
+
+    public function getModel();
 }

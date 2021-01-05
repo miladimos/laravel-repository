@@ -32,4 +32,15 @@ return [
      */
     'repository_interface_base_namespace' => 'Repositories\Interfaces',
 
+    'per_page' => 50,
+    'max_per_page' => 100,
+
+    /*
+     |--------------------------------------------------------------------------
+     | Caching Status
+     |--------------------------------------------------------------------------
+     */
+
+    'cache_enabled' => true,
+
 ];
