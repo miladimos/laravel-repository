@@ -6,7 +6,7 @@ namespace Miladimos\Repository\Repositories;
 use Illuminate\Database\Eloquent\Model;
 
 
-interface IBaseRepositoryInterface
+interface IBaseEloquentRepositoryInterface
 {
     public function all() : object ;
 

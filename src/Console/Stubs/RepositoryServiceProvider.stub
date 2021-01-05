@@ -8,16 +8,16 @@ class RepositoryServiceProvider extends ServiceProvider
 {
 
     protected $repositories = [
-                ModelRepositoryInterface::class,
-                Model::class
-        ];
+        [
+            ModelRepositoryInterface::class,
+            Model::class
+        ],
+    ];
 
     public function register()
     {
-       foreach($repositories as $repository) {
-            $this->app->bind(
-
-             );
-       }
+        foreach($this->repositories as $repository) {
+            $this->app->bind($repository[0], $repository[1]);
+        }
     }
 }

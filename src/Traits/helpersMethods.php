@@ -46,6 +46,14 @@ trait helpersMethods
         return $appNamespace . '\\' . $modelNamespace . '\\' . $model . ';';
     }
 
+    protected static function getInterfaceNamespace($model)
+    {
+        $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $modelNamespace = config('repository.models_namespace') ?? 'Models';
+
+        return $appNamespace . '\\' . $modelNamespace . '\\' . $model . ';';
+    }
+
 
 
 }

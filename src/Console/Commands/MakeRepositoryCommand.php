@@ -3,6 +3,7 @@
 namespace Miladimos\Repository\Console\Commands;
 
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Miladimos\Repository\Repository;
 
@@ -24,7 +25,7 @@ class MakeRepositoryCommand extends Command
 
     public function handle()
     {
-        $modelName = trim($this->argument('model'));
+        $modelName = trim(Str::studly($this->argument('model')));
 
         $this->warn("Repository {$modelName} is creating ...");
 
@@ -39,7 +40,7 @@ class MakeRepositoryCommand extends Command
             die;
         }
 
-
         return 0;
     }
+
 }

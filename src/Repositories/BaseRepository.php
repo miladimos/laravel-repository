@@ -7,7 +7,7 @@ namespace Miladimos\Repository\Repositories;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class BaseRepository implements IBaseRepositoryInterface
+abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 {
     private $app;
 
@@ -53,9 +53,9 @@ abstract class BaseRepository implements IBaseRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function update2(array $data, $id, $attribute = "id")
+    public function update(Model $entity, array $attributes)
     {
-        return $this->model->where($attribute, '=', $id)->update($data);
+        return $this->model->where($attributes, '=', $entity)->update($attributes);
     }
 
     public function find($id): object

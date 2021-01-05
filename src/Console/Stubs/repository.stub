@@ -3,8 +3,9 @@ namespace App\Repositories;
 
 use Miladimos\Repository\Repositories\BaseRepository;
 use {{ $modelNamespace }}
+use {{ $interfaceNamespace }}
 
-class {{$modelName}}Repository extends BaseRepository
+class {{$modelName}}Repository extends BaseRepository implements {{$modelName}}EloquentRepositoryInterface
 {
 
     public function model()

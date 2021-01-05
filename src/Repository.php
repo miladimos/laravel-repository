@@ -13,9 +13,19 @@ class Repository
     use getStubs, helpersMethods, validateModel;
 
 
+    protected static function createProvider()
+    {
+        $template =  self::getRepositoryServiceProviderStub();
+
+        if (!file_exists($path=base_path('/App/Providers/RepositoryServiceProvider.php')))
+            file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
+    }
+
+
     protected static function createRepository($name)
     {
         $modelNamespace = self::getModelNamespace($name);
+        $interfaceNamespace = self::getInterfaceNamespace($name);
         $template = str_replace(
             ['{{$modelName}}', '{{ $modelNamespace }}'],
             [$name, $modelNamespace],
@@ -26,24 +36,16 @@ class Repository
         file_put_contents(base_path("/App/Repositories/{$name}Repository.php"), $template);
     }
 
-    protected static function createProvider()
-    {
-        $template =  self::getRepositoryServiceProviderStub();
-
-        if (!file_exists($path=base_path('/App/Providers/RepositoryServiceProvider.php')))
-            file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
-    }
-
     protected static function createInterface($name)
     {
+        $interfaceNamespace = self::getInterfaceNamespace($name);
         $template = str_replace(
-            ['{{modelName}}'],
-            [$name],
-
+            ['{{ $interfaceNamespace }}'],
+            [$$interfaceNamespace],
             self::getRepositoryInterfaceStub()
         );
 
-        file_put_contents(base_path("/Repositories/{$name}RepositoryInterface.php"), $template);
+        file_put_contents(base_path("/Repositories/{$name}EloquentRepositoryInterface.php"), $template);
 
     }
 
@@ -54,8 +56,8 @@ class Repository
             mkdir($path, 0777, true);
 
         // self::createProvider();
-        // self::createInterface($modelName);
         self::createRepository($modelName);
+        self::createInterface($modelName);
 
         return true;
     }
