@@ -2,6 +2,12 @@
 
 return [
 
+
+    /*
+        *  Path that contains Models
+        * */
+    'models_namespace' =>'App',
+
     /*
         *  Path that contains Models
         * */

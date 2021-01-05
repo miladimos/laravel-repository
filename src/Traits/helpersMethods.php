@@ -38,6 +38,14 @@ trait helpersMethods
         return Str::studly($model);
     }
 
+    protected static function getModelNamespace($model)
+    {
+        $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $modelNamespace = config('repository.models_namespace') ?? 'Models';
+
+        return $appNamespace . '\\' . $modelNamespace . '\\' . $model . ';';
+    }
+
 
 
 }

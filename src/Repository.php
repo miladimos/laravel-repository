@@ -15,11 +15,13 @@ class Repository
 
     protected static function createRepository($name)
     {
+        $modelNamespace = self::getModelNamespace($name);
         $template = str_replace(
-            ['{{$modelName}}'],
-            [$name],
+            ['{{$modelName}}', '{{ $modelNamespace }}'],
+            [$name, $modelNamespace],
             self::getRepositoryStub()
         );
+
 
         file_put_contents(base_path("/App/Repositories/{$name}Repository.php"), $template);
     }

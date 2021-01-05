@@ -2,13 +2,10 @@
 namespace App\Repositories;
 
 use Miladimos\Repository\Repositories\BaseRepository;
-
 use {{ $modelNamespace }}
 
 class {{$modelName}}Repository extends BaseRepository
-s{
-
-    protected $model = {{$modelName}}::class;
+{
 
     public function model()
     {

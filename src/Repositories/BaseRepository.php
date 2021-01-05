@@ -23,12 +23,12 @@ abstract class BaseRepository implements IBaseRepositoryInterface
 
     abstract public function model();
 
-    public function makeModel()
+    final public function makeModel()
     {
         return $this->setModel($this->model());
     }
 
-    public function setModel($model)
+    final public function setModel($model)
     {
         $this->newInstanseModel = $this->app->make($model);
 
@@ -100,6 +100,26 @@ abstract class BaseRepository implements IBaseRepositoryInterface
     }
 
 
+    public function findAllBy($field, $value, $columns = array('*'))
+    {
+        return $this->model->toSql();
+    }
+
+    public function truncate()
+    {
+        return $this->model->truncate();
+    }
+
+    public function search($query)
+    {
+        return $this->model->toSql();
+    }
+
+    public function simplePaginate($limit = null, $columns = ['*'])
+    {
+
+        return $this->model->simplePaginate();
+    }
     public function toSql()
     {
         return $this->model->toSql();

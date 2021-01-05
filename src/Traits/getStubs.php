@@ -35,7 +35,7 @@ trait getStubs
         return file_get_contents(resource_path("vendor/miladimos/repository/stubs/RepositoryInterface.stub"));
     }
 
-    protected static function getStubs($type)
+    protected static function getStub($type)
     {
         return file_get_contents(resource_path("vendor/miladimos/repository/stubs/$type.stub"));
     }
