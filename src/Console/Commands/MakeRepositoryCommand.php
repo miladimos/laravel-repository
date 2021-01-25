@@ -20,7 +20,7 @@ class MakeRepositoryCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Make New Repository';
+    protected $description = 'Create a new Repository';
 
 
     public function handle()
