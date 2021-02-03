@@ -2,30 +2,36 @@
 
 return [
 
+    /*
+      *  Path that contains Models
+    * */
+    'application_namespace' => 'App',
 
     /*
-        *  Path that contains Models
-        * */
-    'models_namespace' =>'App',
+     *  Path that contains Models
+    * */
+    'models_namespace' => 'Models',
 
     /*
-        *  Path that contains Models
-        * */
-    'models_namespace' =>'Models',
-
-    /*
-        *  Path that contains Repositories
-        *
-        * application_namespace + repositories_namespace
-        * */
+    *  Path that contains Repositories
+    *
+    * application_namespace + repositories_namespace
+    * */
     'repositories_namespace' => 'Repositories',
 
     /*
-        * Suffix for Created Repositories
-        *
-        * ex: $modelNameRepository
-        *
-        * */
+    *  Path that contains Repositories
+    *
+    * application_namespace + repositories_namespace
+    * */
+    'interfaces_namespace' => 'Interfaces',
+
+    /*
+    * Suffix for Created Repositories
+    *
+    * ex: $modelNameRepository
+    *
+    * */
     'repositories_suffix' => 'Repository',
 
     /**
@@ -36,7 +42,7 @@ return [
     /**
      * The base namespace, relative to application base namespace, for your repositories' interfaces.
      */
-    'repository_interface_base_namespace' => 'Repositories\Interfaces',
+    'repository_interface_base_namespace' => '',
 
     'per_page' => 50,
     'max_per_page' => 100,
@@ -46,7 +52,16 @@ return [
      | Caching Status
      |--------------------------------------------------------------------------
      */
-
     'cache_enabled' => true,
 
 ];
+
+return $a;
+
+// // $b =[];
+
+// // $b = $a;
+
+// $a['repository_interface_base_path'] = $a['repositories_namespace'] . '+++++++'. $a['interfaces_namespace'];
+
+// return $a;

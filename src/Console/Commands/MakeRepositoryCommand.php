@@ -25,6 +25,7 @@ class MakeRepositoryCommand extends Command
 
     public function handle()
     {
+        dd(config('repository'));
         $modelName = trim(Str::studly($this->argument('model')));
 
         $this->warn("Repository {$modelName} is creating ...");

@@ -15,6 +15,7 @@ class Repository
 
     protected static function createProvider()
     {
+        dd(config('repository'));
         $template =  self::getRepositoryServiceProviderStub();
 
         if (!file_exists($path=base_path('/App/Providers/RepositoryServiceProvider.php')))
