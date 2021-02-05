@@ -1,15 +1,15 @@
-<?php namespace Miladimos\Repository\Traits;
+<?php
 
-use InvalidArgumentException;
+namespace Miladimos\Repository\Traits;
 
-
-trait validateModel
+trait ValidateModel
 {
 
-    protected function ensureRepositoryDoesntAlreadytExist($model) {
+    protected function ensureRepositoryDoesntAlreadytExist($model)
+    {
         if (class_exists($classFullyQualified = $this->getRepositoryNamespace($model), false)) {
-          throw new InvalidArgumentException("{$classFullyQualified} already exists.");
+            return true;
         }
+        return false;
     }
-
 }

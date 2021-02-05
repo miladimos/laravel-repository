@@ -11,7 +11,7 @@
         "lumen packages",
         "laravel packages",
         "lumen support",
-        "slug"
+        "repository pattern"
     ],
     "authors": [
         {
@@ -42,6 +42,14 @@
         }
     },
     "require": {},
+    "scripts": {
+        "post-package-install": [
+            "php artisan vendor:publish --provider=Miladimos\\Repository\\Providers\\RepositoryServiceProvider --tag=repository-stubs --force"
+        ],
+        "post-package-update": [
+            "php artisan vendor:publish --provider=Miladimos\\Repository\\Providers\\RepositoryServiceProvider --tag=repository-stubs --force"
+        ]
+    },
     "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "^9.3",
