@@ -2,7 +2,6 @@
 
 namespace Miladimos\Repository\Console\Commands;
 
-
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -13,17 +12,11 @@ class InstallPackageCommand extends Command
 
     protected $name = 'Install Repository Package';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Simply Install laravel-repository Package';
-
+    protected $description = 'Install laravel-repository Package';
 
     public function handle()
     {
-        $this->warn("Repository Package installing started...");
+        $this->info("laravel-repository package installing started...");
 
         //config
         if (File::exists(config_path('repository.php'))) {
@@ -41,10 +34,24 @@ class InstallPackageCommand extends Command
         }
 
 
-        $confirmStub = $this->confirm("Do you like publish stub files?");
-        if($confirmStub) {
+        $confirmStub = $this->confirm("Do you like publish stubs files?");
+        if ($confirmStub) {
+            if (File::isDirectory(resource_path('vendor/miladimos/repository/stubs'))) {
+                $confirmConfig = $this->confirm("stubs files already exist. you must overwrite it! Are you ok?");
+                if ($confirmConfig) {
+                    $this->publishStubs();
+                    $this->info("stubs publish/overwrite finished");
+                    die;
+                } else {
+                    $this->error("you must publish and overwrite stubs file");
+                    die;
+                }
+            }
             $this->publishStubs();
             $this->info("stub files published!");
+        } else {
+            $this->error("you must publish and overwrite stubs file");
+            die;
         }
 
         $this->info("repository package installed successfully! please star me on github!");
@@ -57,7 +64,8 @@ class InstallPackageCommand extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => "Miladimos\Repository\Providers\RepositoryServiceProvider",
-            '--tag' => "repository-config"
+            '--tag'      => "repository-config",
+            '--force'    => true,
         ]);
     }
 
@@ -65,7 +73,8 @@ class InstallPackageCommand extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => "Miladimos\Repository\Providers\RepositoryServiceProvider",
-            '--tag' => "repository-stubs"
+            '--tag'      => "repository-stubs",
+            '--force'    => true,
         ]);
     }
 }

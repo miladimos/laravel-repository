@@ -8,10 +8,21 @@ use Illuminate\Support\Str;
 trait HelpersMethods
 {
 
-    protected function getRepositoryDefaultNamespace()
+    protected function getRepositoryDefaultDirectory()
     {
         $repositoryNamespace = config('repository.repositories_namespace') ?? 'Repositories';
         return app_path($repositoryNamespace);
+    }
+
+
+    protected function getRepositoryDefaultNamespace($full = true)
+    {
+        $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $repositoryNamespace = config('repository.repositories_namespace') ?? 'Repositories';
+        if ($full)
+            return $appNamespace . '\\' . $repositoryNamespace . ';';
+
+        return $appNamespace . '\\' . $repositoryNamespace;
     }
 
     protected static function getRepositorySuffix($model)
@@ -22,7 +33,7 @@ trait HelpersMethods
 
     protected static function getModelClassName($model)
     {
-        return Str::studly($model);
+        return trim(Str::studly($model));
     }
 
     protected static function getModelNamespace($model)
@@ -33,11 +44,18 @@ trait HelpersMethods
         return $appNamespace . '\\' . $modelNamespace . '\\' . $model . ';';
     }
 
+    protected static function getModelPath($model)
+    {
+        $modelNamespace = config('repository.models_namespace') ?? 'Models';
+
+        return app_path($modelNamespace . '//' . $model);
+    }
+
     protected static function getInterfaceNamespace($model)
     {
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
-        $modelNamespace = config('repository.models_namespace') ?? 'Models';
+        $interfaceNamespace = config('repository.interface_namespace') ?? 'Interfaces';
 
-        return $appNamespace . '\\' . $modelNamespace . '\\' . $model . ';';
+        return $appNamespace . '\\' . $interfaceNamespace . '\\' . $model . ';';
     }
 }

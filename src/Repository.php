@@ -1,24 +1,24 @@
 <?php
 
-
 namespace Miladimos\Repository;
 
-
-use Miladimos\Repository\Traits\getStubs;
-use Miladimos\Repository\Traits\validateModel;
-use Miladimos\Repository\Traits\helpersMethods;
+use Illuminate\Support\Facades\File;
+use Miladimos\Repository\Traits\GetStubs;
+use Miladimos\Repository\Traits\HelpersMethods;
+use Miladimos\Repository\Traits\ValidateModel;
 
 class Repository
 {
-    use getStubs, helpersMethods, validateModel;
+    use GetStubs,
+        HelpersMethods,
+        ValidateModel;
 
 
     protected static function createProvider()
     {
-        dd(config('repository'));
         $template =  self::getRepositoryServiceProviderStub();
 
-        if (!file_exists($path=base_path('/App/Providers/RepositoryServiceProvider.php')))
+        if (!file_exists($path = base_path('/App/Providers/RepositoryServiceProvider.php')))
             file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
     }
 
@@ -47,13 +47,12 @@ class Repository
         );
 
         file_put_contents(base_path("/Repositories/{$name}EloquentRepositoryInterface.php"), $template);
-
     }
 
     public static function make($modelName)
     {
 
-        if (!file_exists($path=(new self)->getRepositoryDefaultNamespace()))
+        if (!File::isDirectory($path = (new self)->getRepositoryDefaultDirectory()))
             mkdir($path, 0777, true);
 
         // self::createProvider();
