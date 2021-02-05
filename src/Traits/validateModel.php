@@ -7,7 +7,7 @@ trait ValidateModel
 
     protected function ensureRepositoryDoesntAlreadytExist($model)
     {
-        if (class_exists($classFullyQualified = $this->getRepositoryNamespace($model), false)) {
+        if (class_exists($this->getRepositoryPath($model))) {
             return true;
         }
         return false;
