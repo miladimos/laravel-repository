@@ -49,13 +49,5 @@
         "phpunit/phpunit": "^9.3",
         "orchestra/testbench": "^v5.5.0"
     },
-    "scripts": {
-        "post-package-install": [
-            "php artisan vendor:publish --provider=Miladimos\\Repository\\Providers\\RepositoryServiceProvider --tag=repository-stubs --force"
-        ],
-        "post-package-update": [
-            "php artisan vendor:publish --provider=Miladimos\\Repository\\Providers\\RepositoryServiceProvider --tag=repository-stubs --force"
-        ]
-    },
-    "license": "MIT",
+    "license": "MIT"
 }

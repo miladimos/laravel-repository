@@ -22,7 +22,6 @@ class Repository
             file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
     }
 
-
     protected static function createRepository($name)
     {
         $modelNamespace = self::getModelNamespace($name);

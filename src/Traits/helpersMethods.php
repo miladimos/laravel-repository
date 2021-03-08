@@ -4,14 +4,13 @@ namespace Miladimos\Repository\Traits;
 
 use Illuminate\Support\Str;
 
-
 trait HelpersMethods
 {
 
     protected function getRepositoryPath($model)
     {
         $repositoryNamespace = config('repository.repositories_namespace') ?? 'Repositories';
-        return app_path($repositoryNamespace. '//' . $model);
+        return app_path($repositoryNamespace . '//' . $model);
     }
 
     protected function getRepositoryDefaultDirectory()
