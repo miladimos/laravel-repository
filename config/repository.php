@@ -2,50 +2,48 @@
 
 return [
 
-    /*
-      *  Path that contains Models
-    * */
+    /**
+     * Application Namespace
+     */
     'application_namespace' => 'App',
 
-    /*
+    /**
      *  Path that contains Models
-    * */
+     *
+     *  application_namespace + \ + models_namespace ==> App\Models
+     */
     'models_namespace' => 'Models',
 
-    /*
-    *  Path that contains Repositories
-    *
-    * application_namespace + repositories_namespace
-    * */
+    /**
+     * Path that contains Repositories
+     *
+     * application_namespace + repositories_namespace ==> App\Repositories
+     *
+     */
     'repositories_namespace' => 'Repositories',
 
-    /*
-    *  Path that contains Repositories
-    *
-    * application_namespace + repositories_namespace
-    * */
+    /**
+     *  Path that contains Repository Interfaces
+     *
+     *  application_namespace + repositories_namespace ==> App\Repositories\Interfaces;
+     */
     'interfaces_namespace' => 'Interfaces',
 
-    /*
-    * Suffix for Created Repositories
-    *
-    * ex: $modelNameRepository
-    *
-    * */
+    /**
+     * Suffix for Created Repositories
+     *
+     * ex: $modelNameRepository
+     *
+     */
     'repositories_suffix' => 'Repository',
 
     /**
-     * The base path in which the repository interfaces are stored.
+     * Pagination Settings
      */
-    'repository_interface_base_path' => 'Repositories/Interfaces',
-
-    /**
-     * The base namespace, relative to application base namespace, for your repositories' interfaces.
-     */
-    'repository_interface_base_namespace' => '',
-
-    'per_page' => 50,
-    'max_per_page' => 100,
+    'pagination' => [
+        'per_page' => 8,
+        'max_per_page' => 28,
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -55,13 +53,3 @@ return [
     'cache_enabled' => true,
 
 ];
-
-return $a;
-
-// // $b =[];
-
-// // $b = $a;
-
-// $a['repository_interface_base_path'] = $a['repositories_namespace'] . '+++++++'. $a['interfaces_namespace'];
-
-// return $a;
