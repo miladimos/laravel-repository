@@ -38,6 +38,14 @@ return [
     'repositories_suffix' => 'Repository',
 
     /**
+     * Suffix for Created Repositories
+     *
+     * ex: $modelNameInterface
+     *
+     */
+    'interfaces_suffix' => 'Interface',
+
+    /**
      * Pagination Settings
      */
     'pagination' => [

@@ -26,18 +26,18 @@ class MakeRepositoryCommand extends Command
 
     public function handle()
     {
-        dd(config('repository'));
         $this->modelName = trim(Str::studly($this->argument('model')));
 
         $this->warn("Repository {$this->modelName} is creating ...");
 
         try {
+
             if ((new self)->ensureRepositoryDoesntAlreadytExist($this->modelName)) {
-                $msg = (new self)->getRepositoryFilePath($this->modelName) . " already exist. you must overwrite it! Are you ok?";
+                $msg = ' ""' . (new self)->getRepositoryPath($this->modelName) . '""'. " already exist. you must overwrite it! Are you ok?";
 
                 $confirm = $this->confirm($msg);
                 if ($confirm) {
-                    if (Toolkit::makeRepository($this->modelName)) {
+                    if (Repository::make($this->modelName)) {
                         $this->info("$this->modelName.php overwrite finished");
                         die;
                     } else {
@@ -45,12 +45,12 @@ class MakeRepositoryCommand extends Command
                         die;
                     }
                 } else {
-                    $this->modelName = $this->ask("Enter the Repository file name? ");
+                    $this->modelName = $this->ask("Enter the Repository another file name? ");
                 }
             }
 
-            if (Toolkit::makeRepository($this->modelName)) {
-                $this->info("Full Repository file: {$this->modelName} is created successfully.");
+            if (Repository::make($this->modelName)) {
+                $this->info("Repository file: {$this->modelName} is created successfully.");
                 die;
             } else {
                 $this->error('Error in creating Repository!');

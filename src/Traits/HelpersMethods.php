@@ -10,7 +10,8 @@ trait HelpersMethods
     protected function getRepositoryPath($model)
     {
         $repositoryNamespace = config('repository.repositories_namespace') ?? 'Repositories';
-        return app_path($repositoryNamespace . '//' . $model);
+
+        return app_path($repositoryNamespace . '\\' . $this->getRepositorySuffix($model) . '.php');
     }
 
     protected function getRepositoryDefaultDirectory()
@@ -19,7 +20,7 @@ trait HelpersMethods
         return app_path($repositoryNamespace);
     }
 
-    protected function getRepositoryDefaultNamespace($full = true)
+    protected static function getRepositoryDefaultNamespace($full = true)
     {
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
         $repositoryNamespace = config('repository.repositories_namespace') ?? 'Repositories';
@@ -33,6 +34,12 @@ trait HelpersMethods
     {
         $repotisorySuffix = config('repositories.repositories_suffix') ?? 'Repository';
         return $model . $repotisorySuffix;
+    }
+
+    protected static function getRepositoryInterfaceSuffix($model)
+    {
+        $interfaceSuffix = config('repositories.interfaces_suffix') ?? 'Interface';
+        return $model . $interfaceSuffix;
     }
 
     protected static function getModelClassName($model)
@@ -58,8 +65,19 @@ trait HelpersMethods
     protected static function getInterfaceNamespace($model)
     {
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
         $interfaceNamespace = config('repository.interface_namespace') ?? 'Interfaces';
+        $interface = static::getRepositoryInterfaceSuffix($model);
 
-        return $appNamespace . '\\' . $interfaceNamespace . '\\' . $model . ';';
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $interfaceNamespace . '\\' . $interface . ';';
+    }
+
+    protected static function getRepositoryNamespace($model)
+    {
+        $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
+        $repository =  static::getRepositorySuffix($model);
+
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $repository  . ';';
     }
 }

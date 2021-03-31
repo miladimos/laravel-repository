@@ -10,7 +10,7 @@ class InstallPackageCommand extends Command
 
     protected $signature = "repository:install";
 
-    protected $name = 'Install Repository Package';
+    protected $name = 'Install repository package';
 
     protected $description = 'Install laravel-repository Package';
 
@@ -25,14 +25,13 @@ class InstallPackageCommand extends Command
                 $this->publishConfig();
                 $this->info("config publish/overwrite finished");
             } else {
-                $this->error("you must publish and overwrite config file");
+                $this->error("you must publish or overwrite config file");
                 die;
             }
         } else {
             $this->publishConfig();
             $this->info("config published");
         }
-
 
         $confirmStub = $this->confirm("Do you like publish stubs files?");
         if ($confirmStub) {

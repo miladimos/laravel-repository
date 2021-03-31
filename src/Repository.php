@@ -26,12 +26,13 @@ class Repository
     {
         $modelNamespace = self::getModelNamespace($name);
         $interfaceNamespace = self::getInterfaceNamespace($name);
+        $repositoryNamespace = self::getRepositoryNamespace($name);
+
         $template = str_replace(
-            ['{{$modelName}}', '{{ $modelNamespace }}'],
-            [$name, $modelNamespace],
+            ['{{ $modelName }}', '{{ $modelNamespace }}', '{{ $repositoryNamespace }}', '{{ $interfaceNamespace }}'],
+            [$name, $modelNamespace, $repositoryNamespace, $interfaceNamespace],
             self::getRepositoryStub()
         );
-
 
         file_put_contents(base_path("/App/Repositories/{$name}Repository.php"), $template);
     }
@@ -54,9 +55,8 @@ class Repository
         if (!File::isDirectory($path = (new self)->getRepositoryDefaultDirectory()))
             mkdir($path, 0777, true);
 
-        // self::createProvider();
         self::createRepository($modelName);
-        self::createInterface($modelName);
+        // self::createInterface($modelName);
 
         return true;
     }
