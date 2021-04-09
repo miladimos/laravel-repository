@@ -4,6 +4,7 @@ namespace Miladimos\Repository\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Miladimos\Repository\Repository;
 
 class InstallPackageCommand extends Command
 {
@@ -17,6 +18,13 @@ class InstallPackageCommand extends Command
     public function handle()
     {
         $this->info("laravel-repository package installing started...");
+
+        if (Repository::createProvider()) {
+            $this->info("RepositoryServiceProvider created successfully.");
+        } else {
+            $this->error("RepositoryServiceProvider already exists, you must delete or rename this, for creating needed package Provider");
+            die;
+        }
 
         //config
         if (File::exists(config_path('repository.php'))) {
@@ -40,7 +48,6 @@ class InstallPackageCommand extends Command
                 if ($confirmConfig) {
                     $this->publishStubs();
                     $this->info("stubs publish/overwrite finished");
-                    die;
                 } else {
                     $this->error("you must publish and overwrite stubs file");
                     die;
@@ -54,10 +61,10 @@ class InstallPackageCommand extends Command
         }
 
         $this->info("repository package installed successfully! please star me on github!");
+        $this->info("https://github.com/miladimos/laravel-repository");
 
         return 0;
     }
-
 
     private function publishConfig()
     {

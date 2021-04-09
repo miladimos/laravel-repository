@@ -1,20 +1,18 @@
 <?php
 
-
 namespace Miladimos\Repository\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 interface IBaseEloquentRepositoryInterface
 {
-    public function all() : object ;
+    public function all(): object;
 
     public function create(array $data);
 
     public function update(Model $entity, array $attributes);
 
-    public function find($id) : object ;
+    public function find($id): object;
 
     public function findOrFail($id);
 
@@ -26,7 +24,7 @@ interface IBaseEloquentRepositoryInterface
 
     public function truncate();
 
-    public function count() : int;
+    public function count(): int;
 
     public function paginate($perPage = 1, $columns = array('*'));
 

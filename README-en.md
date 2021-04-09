@@ -13,6 +13,6 @@
 ``php artisan repository:install``
 
 
-### For Create new Repository 
+### For Create new Repository: 
 
 ``php artisan make:repository {ModelName}``

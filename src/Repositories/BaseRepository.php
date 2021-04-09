@@ -1,11 +1,10 @@
 <?php
 
-
 namespace Miladimos\Repository\Repositories;
-
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Miladimos\Repository\Repositories\IBaseEloquentRepositoryInterface;
 
 abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 {
@@ -13,7 +12,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
     private $model;
 
-    protected $modelInstance;
+    protected $newInstanseModel;
 
     public function __construct()
     {
@@ -47,6 +46,11 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     {
         return $this->model->all();
     }
+
+    // public function create(array $attributes)
+    // {
+    //     return call_user_func_array("{$this->model}::create", [ $attributes ]);
+    // }
 
     public function create(array $data)
     {
@@ -83,7 +87,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->where($field, $columns, $columns);
     }
 
-    public function count($columns = ['*']) : int
+    public function count($columns = ['*']): int
     {
         return $this->model->count($columns);
     }
@@ -98,7 +102,6 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
         return $lists->all();
     }
-
 
     public function findAllBy($field, $value, $columns = array('*'))
     {
@@ -120,6 +123,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
         return $this->model->simplePaginate();
     }
+
     public function toSql()
     {
         return $this->model->toSql();
@@ -130,5 +134,4 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     {
         return $this->model->with($relations);
     }
-
 }

@@ -13,7 +13,6 @@ class Repository
         HelpersMethods,
         Validation;
 
-
     public static function createProvider()
     {
         $template =  self::getRepositoryServiceProviderStub();
@@ -28,16 +27,19 @@ class Repository
     protected static function createRepository($name)
     {
         $modelNamespace = self::getModelNamespace($name);
-        $interfaceNamespace = self::getInterfaceNamespace($name);
+        $repositoryInterfaceNamespace = self::getInterfaceNamespace($name);
         $repositoryNamespace = self::getRepositoryNamespace($name);
 
         $template = str_replace(
-            ['{{ $modelName }}', '{{ $modelNamespace }}', '{{ $repositoryNamespace }}', '{{ $interfaceNamespace }}'],
-            [$name, $modelNamespace, $repositoryNamespace, $interfaceNamespace],
+            ['{{ $modelName }}', '{{ $modelNamespace }}', '{{ $repositoryNamespace }}', '{{ $repositoryInterfaceNamespace }}'],
+            [$name, $modelNamespace, $repositoryNamespace, $repositoryInterfaceNamespace],
             self::getRepositoryStub()
         );
 
-        file_put_contents(base_path("/App/Repositories/{$name}Repository.php"), $template);
+        if (!File::isDirectory($path = base_path("/App/Repositories/{$name}")))
+            mkdir($path, 0777, true);
+
+        file_put_contents("$path/{$name}Repository.php", $template);
     }
 
     protected static function createInterface($name)

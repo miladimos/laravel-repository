@@ -32,13 +32,6 @@ class MakeRepositoryCommand extends Command
 
         $this->info("RepositoryServiceProvider is creating...");
 
-        if (Repository::createProvider()) {
-            $this->info("RepositoryServiceProvider created successfully.");
-        } else {
-            $this->error("RepositoryServiceProvider already exists, you must delete or rename this, for creating needed package Provider");
-            die;
-        }
-
         try {
 
             if ((new self)->ensureRepositoryDoesntAlreadytExist($this->modelName)) {
@@ -47,7 +40,7 @@ class MakeRepositoryCommand extends Command
                 $confirm = $this->confirm($msg);
                 if ($confirm) {
                     if (Repository::make($this->modelName)) {
-                        $this->info("$this->modelName.php overwrite finished");
+                        $this->info("{$this->modelName}Repository.php overwrite finished");
                         die;
                     } else {
                         $this->error('Error in overwriting Repository!');

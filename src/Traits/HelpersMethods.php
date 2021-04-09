@@ -78,7 +78,7 @@ trait HelpersMethods
         $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
         $repository =  static::getRepositorySuffix($model);
 
-        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $repository  . ';';
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model. '\\' . $repository  . ';';
     }
 
 

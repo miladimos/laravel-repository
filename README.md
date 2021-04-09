@@ -8,7 +8,7 @@
 
 ``composer require miladimos/laravel-repository``
 
-### برای نصب فایل های پکیج از دستور زیر استفاده کنید 
+### پکیج از دستور زیر استفاده کنید 
 
 ``php artisan repository:install``
 
