@@ -7,6 +7,9 @@ use Illuminate\Support\ServiceProvider;
 class RepositoryServiceProvider extends ServiceProvider
 {
 
+    /**
+    * define your repositories here
+    */
     protected $repositories = [
         [
             ModelRepositoryInterface::class,
@@ -16,7 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider
 
     public function register()
     {
-        foreach($this->repositories as $repository) {
+        foreach ($this->repositories as $repository) {
             $this->app->bind($repository[0], $repository[1]);
         }
     }

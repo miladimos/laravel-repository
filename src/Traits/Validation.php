@@ -2,7 +2,7 @@
 
 namespace Miladimos\Repository\Traits;
 
-trait ValidateModel
+trait Validation
 {
     protected function ensureRepositoryDoesntAlreadytExist($model)
     {
@@ -10,5 +10,13 @@ trait ValidateModel
             return true;
         }
         return false;
+    }
+
+    public static function ensureRepositoryServiceProviderDoesntAlreadytExist()
+    {
+        if (file_exists(self::getRepositoryServiceProviderPath())) {
+            return false;
+        }
+        return true;
     }
 }

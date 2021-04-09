@@ -80,4 +80,11 @@ trait HelpersMethods
 
         return $appNamespace . '\\' . $repositoryNamespace . '\\' . $repository  . ';';
     }
+
+
+    protected static function getRepositoryServiceProviderPath()
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        return app_path("Providers{$ds}RepositoryServiceProvider.php");
+    }
 }

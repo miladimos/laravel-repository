@@ -6,14 +6,14 @@ use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Miladimos\Repository\Repository;
 use Miladimos\Repository\Traits\GetStubs;
-use Miladimos\Repository\Traits\ValidateModel;
+use Miladimos\Repository\Traits\Validation;
 use Miladimos\Repository\Traits\HelpersMethods;
 
 class MakeRepositoryCommand extends Command
 {
     use GetStubs,
         HelpersMethods,
-        ValidateModel;
+        Validation;
 
     protected $signature = "make:repository
                            { model : Model Name }";
@@ -30,10 +30,19 @@ class MakeRepositoryCommand extends Command
 
         $this->warn("Repository {$this->modelName} is creating ...");
 
+        $this->info("RepositoryServiceProvider is creating...");
+
+        if (Repository::createProvider()) {
+            $this->info("RepositoryServiceProvider created successfully.");
+        } else {
+            $this->error("RepositoryServiceProvider already exists, you must delete or rename this, for creating needed package Provider");
+            die;
+        }
+
         try {
 
             if ((new self)->ensureRepositoryDoesntAlreadytExist($this->modelName)) {
-                $msg = ' ""' . (new self)->getRepositoryPath($this->modelName) . '""'. " already exist. you must overwrite it! Are you ok?";
+                $msg = ' ""' . (new self)->getRepositoryPath($this->modelName) . '""' . " already exist. you must overwrite it! Are you ok?";
 
                 $confirm = $this->confirm($msg);
                 if ($confirm) {

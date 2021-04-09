@@ -5,21 +5,24 @@ namespace Miladimos\Repository;
 use Illuminate\Support\Facades\File;
 use Miladimos\Repository\Traits\GetStubs;
 use Miladimos\Repository\Traits\HelpersMethods;
-use Miladimos\Repository\Traits\ValidateModel;
+use Miladimos\Repository\Traits\Validation;
 
 class Repository
 {
     use GetStubs,
         HelpersMethods,
-        ValidateModel;
+        Validation;
 
 
-    protected static function createProvider()
+    public static function createProvider()
     {
         $template =  self::getRepositoryServiceProviderStub();
-
-        if (!file_exists($path = base_path('/App/Providers/RepositoryServiceProvider.php')))
-            file_put_contents(base_path('/App/Providers/RepositoryServiceProvider.php'), $template);
+        $path = self::getRepositoryServiceProviderPath();
+        if (self::ensureRepositoryServiceProviderDoesntAlreadytExist()) {
+            file_put_contents($path, $template);
+            return true;
+        }
+        return false;
     }
 
     protected static function createRepository($name)
