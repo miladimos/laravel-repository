@@ -66,19 +66,24 @@ trait HelpersMethods
     {
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
         $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
-        $interfaceNamespace = config('repository.interface_namespace') ?? 'Interfaces';
-        $interface = static::getRepositoryInterfaceSuffix($model);
 
-        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $interfaceNamespace . '\\' . $interface . ';';
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model;
+    }
+
+    protected static function getRepositoryInterfaceNamespace($model)
+    {
+        $appNamespace = config('repository.base_app_namespace') ?? 'App';
+        $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
+
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model .'\\' . $model;
     }
 
     protected static function getRepositoryNamespace($model)
     {
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
         $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
-        $repository =  static::getRepositorySuffix($model);
 
-        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model. '\\' . $repository  . ';';
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model;
     }
 
 

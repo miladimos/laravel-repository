@@ -27,7 +27,7 @@ class Repository
     protected static function createRepository($name)
     {
         $modelNamespace = self::getModelNamespace($name);
-        $repositoryInterfaceNamespace = self::getInterfaceNamespace($name);
+        $repositoryInterfaceNamespace = self::getRepositoryInterfaceNamespace($name);
         $repositoryNamespace = self::getRepositoryNamespace($name);
 
         $template = str_replace(
@@ -44,14 +44,17 @@ class Repository
 
     protected static function createInterface($name)
     {
-        $interfaceNamespace = self::getInterfaceNamespace($name);
+        $repositoryInterfaceNamespace = self::getInterfaceNamespace($name);
         $template = str_replace(
-            ['{{ $interfaceNamespace }}'],
-            [$$interfaceNamespace],
+            ['{{ $repositoryInterfaceNamespace }}', '{{ $modelName }}'],
+            [$repositoryInterfaceNamespace, $name],
             self::getRepositoryInterfaceStub()
         );
 
-        file_put_contents(base_path("/Repositories/{$name}EloquentRepositoryInterface.php"), $template);
+        if (!File::isDirectory($path = base_path("/App/Repositories/{$name}")))
+            mkdir($path, 0777, true);
+
+        file_put_contents("{$path}/{$name}EloquentRepositoryInterface.php", $template);
     }
 
     public static function make($modelName)
@@ -61,7 +64,7 @@ class Repository
             mkdir($path, 0777, true);
 
         self::createRepository($modelName);
-        // self::createInterface($modelName);
+        self::createInterface($modelName);
 
         return true;
     }
