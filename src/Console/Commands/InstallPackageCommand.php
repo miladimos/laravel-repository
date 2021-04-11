@@ -23,7 +23,7 @@ class InstallPackageCommand extends Command
             $this->info("RepositoryServiceProvider created successfully.");
         } else {
             $this->error("RepositoryServiceProvider already exists, you must delete or rename this, for creating needed package Provider");
-            die;
+            // die;
         }
 
         //config
