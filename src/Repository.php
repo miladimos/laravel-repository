@@ -15,8 +15,13 @@ class Repository
 
     public static function createProvider($providerName)
     {
-        $template =  self::getRepositoryServiceProviderStub();
         $path = self::getRepositoryServiceProviderPath($providerName);
+        $template = str_replace(
+            ['{{ $providerName }}'],
+            [$providerName],
+            self::getRepositoryServiceProviderStub()
+        );
+
         if (self::ensureRepositoryServiceProviderDoesntAlreadytExist($providerName)) {
             file_put_contents($path, $template);
             return true;
