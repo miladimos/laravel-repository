@@ -13,11 +13,11 @@ class Repository
         HelpersMethods,
         Validation;
 
-    public static function createProvider()
+    public static function createProvider($providerName)
     {
         $template =  self::getRepositoryServiceProviderStub();
-        $path = self::getRepositoryServiceProviderPath();
-        if (self::ensureRepositoryServiceProviderDoesntAlreadytExist()) {
+        $path = self::getRepositoryServiceProviderPath($providerName);
+        if (self::ensureRepositoryServiceProviderDoesntAlreadytExist($providerName)) {
             file_put_contents($path, $template);
             return true;
         }

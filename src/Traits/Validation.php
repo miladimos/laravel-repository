@@ -12,9 +12,9 @@ trait Validation
         return false;
     }
 
-    public static function ensureRepositoryServiceProviderDoesntAlreadytExist()
+    public static function ensureRepositoryServiceProviderDoesntAlreadytExist($providerName)
     {
-        if (file_exists(self::getRepositoryServiceProviderPath())) {
+        if (file_exists(self::getRepositoryServiceProviderPath($providerName))) {
             return false;
         }
         return true;

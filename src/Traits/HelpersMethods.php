@@ -75,7 +75,7 @@ trait HelpersMethods
         $appNamespace = config('repository.base_app_namespace') ?? 'App';
         $repositoryNamespace = config('repository.repository_namespace') ?? 'Repositories';
 
-        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model .'\\' . $model;
+        return $appNamespace . '\\' . $repositoryNamespace . '\\' . $model . '\\' . $model;
     }
 
     protected static function getRepositoryNamespace($model)
@@ -87,9 +87,9 @@ trait HelpersMethods
     }
 
 
-    protected static function getRepositoryServiceProviderPath()
+    protected static function getRepositoryServiceProviderPath($providerName)
     {
         $ds = DIRECTORY_SEPARATOR;
-        return app_path("Providers{$ds}RepositoryServiceProvider.php");
+        return app_path("Providers{$ds}{$providerName}.php");
     }
 }

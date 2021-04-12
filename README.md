@@ -50,4 +50,39 @@ add custom methods in TagEloquentRepositoryInterface and implement them.
 
 
 
+you must have a provider with below content and register it:
+
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class RepositoryServiceProvider extends ServiceProvider
+{
+
+    /**
+    * define your repositories here
+    */
+    protected $repositories = [
+        [
+            ModelRepositoryInterface::class,
+            Model::class
+        ],
+    ];
+
+    public function register()
+    {
+        foreach ($this->repositories as $repository) {
+            $this->app->bind($repository[0], $repository[1]);
+        }
+    }
+}
+```
+or create it automatically by below command:
+```php 
+php artisan make:repository:provider
+```
+
 
