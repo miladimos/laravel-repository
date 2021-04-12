@@ -16,3 +16,35 @@
 ### For Create new Repository: 
 
 ``php artisan make:repository {ModelName}``
+
+### Example:
+
+``php php artisan make:repository Tag``
+
+this create a TagRepository and TagEloquentRepositoryInterface
+
+next you must add Repository to RepositoryServiceProvider in repositories property like:
+```php 
+protected $repositories = [
+    [
+        TagEloquentRepositoryInterface::class,
+        TagRepository::class,
+    ],
+];
+```
+
+
+next in your controller add this:
+
+```php
+private $tagRepo;
+public function __construct(TagEloquentRepositoryInterface $tagRepo)
+{
+    $this->tagRepo = $tagRepo;
+}
+
+```
+
+
+
+

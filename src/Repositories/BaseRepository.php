@@ -20,6 +20,11 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         $this->makeModel();
     }
 
+    // public function __construct(Model $model)
+    // {
+    //     $this->model = $model;
+    // }
+
     abstract public function model();
 
     final public function makeModel()
