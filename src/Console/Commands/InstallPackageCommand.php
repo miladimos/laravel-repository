@@ -19,6 +19,25 @@ class InstallPackageCommand extends Command
     {
         $this->info("laravel-repository package installing started...");
 
+        $confirmStub = $this->confirm("Do you like publish stubs files?");
+        if ($confirmStub) {
+            if (File::isDirectory(resource_path('vendor/miladimos/repository/stubs'))) {
+                $confirmConfig = $this->confirm("stubs files already exist. you must overwrite it! Are you ok?");
+                if ($confirmConfig) {
+                    $this->publishStubs();
+                    $this->info("stubs publish/overwrite finished");
+                } else {
+                    $this->error("you must publish and overwrite stubs file");
+                    die;
+                }
+            }
+            $this->publishStubs();
+            $this->info("stub files published!");
+        } else {
+            $this->error("you must publish and overwrite stubs file");
+            die;
+        }
+
         if (Repository::createProvider()) {
             $this->info("RepositoryServiceProvider created successfully.");
         } else {
@@ -41,24 +60,6 @@ class InstallPackageCommand extends Command
             $this->info("config published");
         }
 
-        $confirmStub = $this->confirm("Do you like publish stubs files?");
-        if ($confirmStub) {
-            if (File::isDirectory(resource_path('vendor/miladimos/repository/stubs'))) {
-                $confirmConfig = $this->confirm("stubs files already exist. you must overwrite it! Are you ok?");
-                if ($confirmConfig) {
-                    $this->publishStubs();
-                    $this->info("stubs publish/overwrite finished");
-                } else {
-                    $this->error("you must publish and overwrite stubs file");
-                    die;
-                }
-            }
-            $this->publishStubs();
-            $this->info("stub files published!");
-        } else {
-            $this->error("you must publish and overwrite stubs file");
-            die;
-        }
 
         $this->info("repository package installed successfully! please star me on github!");
         $this->info("https://github.com/miladimos/laravel-repository");

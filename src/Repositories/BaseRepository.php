@@ -72,7 +72,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function findOrFail($id)
+    public function findOrFail($id): ?object
     {
         return $this->model->findOrFail($id);
     }

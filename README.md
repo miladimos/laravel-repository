@@ -46,4 +46,8 @@ public function __construct(TagEloquentRepositoryInterface $tagRepo)
 
 ```
 
+add custom methods in TagEloquentRepositoryInterface and implement them.
+
+
+
 
