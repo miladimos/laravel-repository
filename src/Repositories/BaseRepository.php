@@ -42,14 +42,19 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model = $this->newInstanseModel;
     }
 
+    /**
+     * return current modle
+     *
+     * @return Model
+     */
     public function getModel()
     {
         return $this->model;
     }
 
-    public function all(): object
+    public function all($columns = ['*']): object
     {
-        return $this->model->all();
+        return $this->model->all($columns);
     }
 
     // public function create(array $attributes)
@@ -62,9 +67,25 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function update(Model $entity, array $attributes)
+    public function update(array $data, $id, $attribute = "id")
     {
-        return $this->model->where($attributes, '=', $entity)->update($attributes);
+        $keys = ['_token', '_method', 'XDEBUG_SESSION_START'];
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $data)) {
+                unset($data[$key]);
+            }
+        }
+        $updated = $this->model
+            ->where($attribute, '=', $id)
+            ->update($data);
+
+        if (!$updated) {
+            throw new Exception(
+                "Update model {$this->model()} was unsuccessful"
+            );
+        }
+
+        return $updated;
     }
 
     public function find($id): object
@@ -77,14 +98,44 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function paginate($perPage = 25, $columns = array('*'))
-    {
-        return $this->model->paginate($perPage, $columns);
-    }
-
     public function delete($id)
     {
-        return $this->model->findOrFail($id)->delete();
+        $status = $this->model->destroy($id);
+        if (!$status and !is_array($id) and !empty($id)) {
+            throw new Exception(
+                "Unable to delete {$this->model()} with id: {$id}"
+            );
+        }
+        return $status;
+    }
+
+    public function first()
+    {
+        return $this->model->first();
+    }
+
+    public function last()
+    {
+        return $this->model->last();
+    }
+
+    public function whereIn($attribute, array $values)
+    {
+        return $this->model->whereIn($attribute, $values)->get();
+    }
+
+    public function max($column)
+    {
+        return $this->modelQuery->max($column);
+    }
+
+    /**
+     * @param $column
+     * @return mixed
+     */
+    public function min($column)
+    {
+        return $this->modelQuery->min($column);
     }
 
     public function findWhere(string $field, $condition, $columns)
@@ -108,7 +159,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $lists->all();
     }
 
-    public function findAllBy($field, $value, $columns = array('*'))
+    public function findAllBy($field, $value, $columns = ['*'])
     {
         return $this->model->toSql();
     }
@@ -118,14 +169,13 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->truncate();
     }
 
-    public function search($query)
+    public function paginate($perPage = 8, $columns = ['*'])
     {
-        return $this->model->toSql();
+        return $this->model->paginate($perPage, $columns);
     }
 
     public function simplePaginate($limit = null, $columns = ['*'])
     {
-
         return $this->model->simplePaginate();
     }
 

@@ -4,6 +4,7 @@ return [
 
     /**
      * Application Namespace
+     * app()->getNamespace()
      */
     'application_namespace' => 'App',
 
@@ -59,5 +60,4 @@ return [
      |--------------------------------------------------------------------------
      */
     'cache_enabled' => true,
-
 ];

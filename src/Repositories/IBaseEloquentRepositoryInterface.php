@@ -6,19 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 
 interface IBaseEloquentRepositoryInterface
 {
-    public function all(): object;
+    public function all($columns = ['*']): object;
 
     public function create(array $data);
 
-    public function update(Model $entity, array $attributes);
+    public function update(array $data, $id, $attribute = "id");
 
     public function find($id): object;
 
     public function findOrFail($id);
 
-    public function findAllBy($field, $value, $columns = array('*'));
+    public function findAllBy($field, $value, $columns = ['*']);
 
     public function findWhere(string $field, $condition, $columns);
+
+    public function first();
+
+    public function last();
+
+    public function firstBy($attribute, $value = null);
+
+    public function firstByOrFail($attribute, $value = null);
+
+    public function firstOrCreate(array $attributes, array $values);
+
+    public function whereIn($attribute, array $values);
+
+    public function max($column);
+
+    public function min($column);
 
     public function delete(int $id);
 
@@ -26,7 +42,7 @@ interface IBaseEloquentRepositoryInterface
 
     public function count(): int;
 
-    public function paginate($perPage = 1, $columns = array('*'));
+    public function paginate($perPage = 8, $columns = ['*']);
 
     public function search($queries);
 

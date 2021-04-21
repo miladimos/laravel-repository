@@ -10,9 +10,6 @@ use Miladimos\Repository\Repository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-
-    public static $packagePath = null;
-
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . "/../../config/repository.php", 'repository');
@@ -22,8 +19,6 @@ class RepositoryServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        self::$packagePath = dirname(__DIR__);
-
         if ($this->app->runningInConsole()) {
 
             $this->registerPublishes();
