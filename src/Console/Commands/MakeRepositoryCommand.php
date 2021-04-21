@@ -16,7 +16,7 @@ class MakeRepositoryCommand extends Command
         Validation;
 
     protected $signature = "make:repository
-                           { model : Model Name }";
+                           { model : Model Name } {--f|force}";
 
     protected $name = 'Repository';
 
