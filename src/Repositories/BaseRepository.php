@@ -2,9 +2,9 @@
 
 namespace Miladimos\Repository\Repositories;
 
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Miladimos\Repository\Repositories\IBaseEloquentRepositoryInterface;
+use Exception;
 
 abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 {
@@ -57,11 +57,6 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->all($columns);
     }
 
-    // public function create(array $attributes)
-    // {
-    //     return call_user_func_array("{$this->model}::create", [ $attributes ]);
-    // }
-
     public function create(array $data)
     {
         return $this->model->create($data);
@@ -98,25 +93,24 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function delete($id)
+    public function findWhere(string $field, $condition, $columns)
     {
-        $status = $this->model->destroy($id);
-        if (!$status and !is_array($id) and !empty($id)) {
-            throw new Exception(
-                "Unable to delete {$this->model()} with id: {$id}"
-            );
-        }
-        return $status;
+        return $this->model->where($field, $condition, $columns);
     }
 
-    public function first()
+    public function first(): object
     {
         return $this->model->first();
     }
 
-    public function last()
+    public function last(): object
     {
-        return $this->model->last();
+        return $this->model->latest()->first();
+    }
+
+    public function firstOrCreate($attributes, $values)
+    {
+        //
     }
 
     public function whereIn($attribute, array $values)
@@ -124,6 +118,10 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->whereIn($attribute, $values)->get();
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function max($column)
     {
         return $this->modelQuery->max($column);
@@ -138,14 +136,40 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->modelQuery->min($column);
     }
 
-    public function findWhere(string $field, $condition, $columns)
+    public function delete($id)
     {
-        return $this->model->where($field, $columns, $columns);
+        $status = $this->model->destroy($id);
+        if (!$status and !is_array($id) and !empty($id)) {
+            throw new Exception(
+                "Unable to delete {$this->model()} with id: {$id}"
+            );
+        }
+        return $status;
+    }
+
+    public function truncate()
+    {
+        return $this->model->truncate();
     }
 
     public function count($columns = ['*']): int
     {
         return $this->model->count($columns);
+    }
+
+    public function paginate($perPage = 8, $columns = ['*'])
+    {
+        return $this->model->paginate($perPage, $columns);
+    }
+
+    public function simplePaginate($limit = null, $columns = ['*'])
+    {
+        return $this->model->simplePaginate($limit, $columns);
+    }
+
+    public function search($query, $columns = ["*"])
+    {
+        //
     }
 
     public function pluck($value, $key = null)
@@ -157,36 +181,6 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         }
 
         return $lists->all();
-    }
-
-    public function findAllBy($field, $value, $columns = ['*'])
-    {
-        return $this->model->toSql();
-    }
-
-    public function firstOrCreate($attributes, $values)
-    {
-        //
-    }
-
-    public function search($query)
-    {
-        //
-    }
-
-    public function truncate()
-    {
-        return $this->model->truncate();
-    }
-
-    public function paginate($perPage = 8, $columns = ['*'])
-    {
-        return $this->model->paginate($perPage, $columns);
-    }
-
-    public function simplePaginate($limit = null, $columns = ['*'])
-    {
-        return $this->model->simplePaginate();
     }
 
     public function toSql()

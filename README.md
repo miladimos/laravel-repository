@@ -1,29 +1,27 @@
 - [![Starts](https://img.shields.io/github/stars/miladimos/laravel-repository?style=flat&logo=github)](https://github.com/miladimos/laravel-repository/forks)
 - [![Forks](https://img.shields.io/github/forks/miladimos/laravel-repository?style=flat&logo=github)](https://github.com/miladimos/laravel-repository/stargazers)
 
-
 ### in your project
 
-``composer require miladimos/laravel-repository``
+`composer require miladimos/laravel-repository`
 
-### for install package 
+### for install package
 
-``php artisan repository:install``
+`php artisan repository:install`
 
+### for create new repository
 
-### for create new repository 
-
-``php artisan make:repository {ModelName}``
-
+`php artisan make:repository {ModelName}`
 
 ### Example:
 
-``php php artisan make:repository Tag``
+`php php artisan make:repository Tag`
 
 this create a TagRepository and TagEloquentRepositoryInterface
 
 next you must add Repository to RepositoryServiceProvider in repositories property like:
-```php 
+
+```php
 protected $repositories = [
     [
         TagEloquentRepositoryInterface::class,
@@ -44,9 +42,6 @@ public function __construct(TagEloquentRepositoryInterface $tagRepo)
 ```
 
 add custom methods in TagEloquentRepositoryInterface and implement them.
-
-
-
 
 you must have a provider with below content and register it:
 
@@ -78,9 +73,21 @@ class RepositoryServiceProvider extends ServiceProvider
     }
 }
 ```
+
 or create it automatically by below command:
-```php 
+
+```php
 php artisan make:repository:provider
 ```
 
+and add to app.php providers:
 
+```php
+App\Providers\RepositoryServiceProvider::class,
+```
+
+#### Methods:
+
+```php
+
+```

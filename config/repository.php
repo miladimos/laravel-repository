@@ -46,12 +46,4 @@ return [
      */
     'interfaces_suffix' => 'Interface',
 
-    /**
-     * Pagination Settings
-     */
-    'pagination' => [
-        'per_page' => 8,
-        'max_per_page' => 50,
-    ],
-
 ];
