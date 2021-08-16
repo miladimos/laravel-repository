@@ -164,6 +164,16 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->model->toSql();
     }
 
+    public function firstOrCreate($attributes, $values)
+    {
+        //
+    }
+
+    public function search($query)
+    {
+        //
+    }
+
     public function truncate()
     {
         return $this->model->truncate();

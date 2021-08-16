@@ -24,10 +24,6 @@ interface IBaseEloquentRepositoryInterface
 
     public function last();
 
-    public function firstBy($attribute, $value = null);
-
-    public function firstByOrFail($attribute, $value = null);
-
     public function firstOrCreate(array $attributes, array $values);
 
     public function whereIn($attribute, array $values);

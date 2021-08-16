@@ -2,23 +2,21 @@
 - [![Forks](https://img.shields.io/github/forks/miladimos/laravel-repository?style=flat&logo=github)](https://github.com/miladimos/laravel-repository/stargazers)
 
 
-- [English](README-en.md)
-
-### برای نصب در مسیر روت پروژه خود دستور زیر را در ریشه پروژه اجرا کنید 
+### in your project
 
 ``composer require miladimos/laravel-repository``
 
-### پکیج از دستور زیر استفاده کنید 
+### for install package 
 
 ``php artisan repository:install``
 
 
-### برای ایجاد یک ریپازیتوری از دستور زیر استفاده کنید 
+### for create new repository 
 
 ``php artisan make:repository {ModelName}``
 
 
-### مثال:
+### Example:
 
 ``php php artisan make:repository Tag``
 
@@ -34,7 +32,6 @@ protected $repositories = [
 ];
 ```
 
-
 next in your controller add this:
 
 ```php
@@ -47,6 +44,7 @@ public function __construct(TagEloquentRepositoryInterface $tagRepo)
 ```
 
 add custom methods in TagEloquentRepositoryInterface and implement them.
+
 
 
 

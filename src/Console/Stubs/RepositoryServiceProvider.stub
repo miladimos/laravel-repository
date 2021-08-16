@@ -13,7 +13,7 @@ class {{ $providerName }} extends ServiceProvider
     protected $repositories = [
         [
             ModelRepositoryInterface::class,
-            Model::class
+            ModelRepository::class
         ],
     ];
 
