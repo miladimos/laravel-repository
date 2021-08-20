@@ -61,7 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider
     protected $repositories = [
         [
             ModelRepositoryInterface::class,
-            Model::class
+            ModelRepository::class
         ],
     ];
 
