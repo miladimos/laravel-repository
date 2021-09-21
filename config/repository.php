@@ -45,5 +45,4 @@ return [
      *
      */
     'interfaces_suffix' => 'Interface',
-
 ];
