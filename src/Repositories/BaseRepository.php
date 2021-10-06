@@ -20,11 +20,6 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         $this->makeModel();
     }
 
-    // public function __construct(Model $model)
-    // {
-    //     $this->model = $model;
-    // }
-
     abstract public function model();
 
     final public function makeModel()
@@ -32,7 +27,11 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->setModel($this->model());
     }
 
-    final public function setModel($model)
+    /**
+     * @param $column
+     * @return mixed
+     */
+    final public function setModel(Model $model)
     {
         $this->newInstanseModel = $this->app->make($model);
 
@@ -43,25 +42,37 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     }
 
     /**
-     * return current modle
+     * return current model
      *
      * @return Model
      */
-    public function getModel()
+    public function getModel(): Model
     {
         return $this->model;
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function all($columns = ['*']): object
     {
         return $this->model->all($columns);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function create(array $data)
     {
         return $this->model->create($data);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function update(array $data, $id, $attribute = "id")
     {
         $keys = ['_token', '_method', 'XDEBUG_SESSION_START'];
@@ -70,6 +81,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
                 unset($data[$key]);
             }
         }
+
         $updated = $this->model
             ->where($attribute, '=', $id)
             ->update($data);
@@ -83,36 +95,64 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $updated;
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function find($id): object
     {
         return $this->model->find($id);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function findOrFail($id): ?object
     {
         return $this->model->findOrFail($id);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function findWhere(string $field, $condition, $columns)
     {
         return $this->model->where($field, $condition, $columns);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function first(): object
     {
         return $this->model->first();
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function last(): object
     {
         return $this->model->latest()->first();
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function firstOrCreate($attributes, $values)
     {
         //
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function whereIn($attribute, array $values)
     {
         return $this->model->whereIn($attribute, $values)->get();
@@ -136,6 +176,10 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $this->modelQuery->min($column);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function delete($id)
     {
         $status = $this->model->destroy($id);
@@ -147,31 +191,56 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $status;
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function truncate()
     {
         return $this->model->truncate();
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function count($columns = ['*']): int
     {
         return $this->model->count($columns);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function paginate($perPage = 8, $columns = ['*'])
     {
         return $this->model->paginate($perPage, $columns);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function simplePaginate($limit = null, $columns = ['*'])
     {
         return $this->model->simplePaginate($limit, $columns);
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function search($query, $columns = ["*"])
     {
         //
     }
 
+    /**
+     * @param $value
+     * @param $key
+     * @return mixed
+     */
     public function pluck($value, $key = null)
     {
         $lists = $this->model->pluck($value, $key);
@@ -183,12 +252,20 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
         return $lists->all();
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function toSql()
     {
         return $this->model->toSql();
     }
 
-    // Eager load database relationships
+    /**
+     * Eager load database relationships
+     * @param $column
+     * @return mixed
+     */
     public function with($relations)
     {
         return $this->model->with($relations);

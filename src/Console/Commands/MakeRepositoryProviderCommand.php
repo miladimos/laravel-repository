@@ -18,7 +18,7 @@ class MakeRepositoryProviderCommand extends Command
     protected $signature = "make:repository:provider
                             {name=RepositoryServiceProvider : Provider name}";
 
-    protected $description = 'Create a repository provider';
+    protected $description = 'Create a Service provider for repository ';
 
     protected $name;
 
@@ -26,14 +26,12 @@ class MakeRepositoryProviderCommand extends Command
     {
         $this->name = trim(Str::studly($this->argument('name')));
 
-        $this->warn("Repository {$this->name} is creating ...");
-
-        $this->info("{$this->name} is creating...");
+        $this->warn("Serivce Provider {$this->name} is creating...");
 
         try {
 
             if (Repository::createProvider($this->name)) {
-                $this->info("Service Provider file: {$this->name} is created successfully.");
+                $this->info("Service Provider: {$this->name} is created successfully.");
             } else {
                 $msg = ' ""' . $this->name . '""' . " already exist. do you want create another?";
                 $confirm = $this->confirm($msg);

@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 interface IBaseEloquentRepositoryInterface
 {
+
     public function setModel(Model $model);
 
-    public function getModel();
+    public function getModel(): Model;
 
     public function all($columns = ['*']): object;
 

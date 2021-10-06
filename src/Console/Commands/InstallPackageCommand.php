@@ -4,7 +4,6 @@ namespace Miladimos\Repository\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Miladimos\Repository\Repository;
 
 class InstallPackageCommand extends Command
 {
@@ -34,6 +33,7 @@ class InstallPackageCommand extends Command
             $this->info("config published");
         }
 
+        // stub files
         $confirmStub = $this->confirm("Do you like publish stubs files?");
         if ($confirmStub) {
             if (File::isDirectory(resource_path('vendor/miladimos/repository/stubs'))) {

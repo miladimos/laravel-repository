@@ -30,8 +30,6 @@ class MakeRepositoryCommand extends Command
 
         $this->warn("Repository {$this->modelName} is creating ...");
 
-        $this->info("RepositoryServiceProvider is creating...");
-
         try {
 
             if ((new self)->ensureRepositoryDoesntAlreadytExist($this->modelName)) {
