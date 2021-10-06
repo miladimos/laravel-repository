@@ -17,6 +17,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     public function __construct()
     {
         $this->app = app();
+
         $this->makeModel();
     }
 
@@ -53,7 +54,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
     /**
      * @param $column
-     * @return mixed
+     * @return object
      */
     public function all($columns = ['*']): object
     {
@@ -62,7 +63,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
     /**
      * @param $column
-     * @return mixed
+     * @return object
      */
     public function create(array $data)
     {
