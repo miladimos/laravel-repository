@@ -27,6 +27,10 @@ interface IBaseEloquentRepositoryInterface
 
     public function last(): object;
 
+    public function next(): object;
+
+    public function before(): object;
+
     public function firstOrCreate(array $attributes, array $values);
 
     public function whereIn($attribute, array $values);

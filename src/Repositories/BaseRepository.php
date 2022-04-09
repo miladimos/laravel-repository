@@ -12,7 +12,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
 
     private $model;
 
-    protected $newInstanseModel;
+    protected $newInstanceModel;
 
     public function __construct()
     {
@@ -34,12 +34,12 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      */
     final public function setModel(Model $model)
     {
-        $this->newInstanseModel = $this->app->make($model);
+        $this->newInstanceModel = $this->app->make($model);
 
-        if (!$this->newInstanseModel instanceof Model)
-            throw new Exception("Class {$this->newInstanseModel} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+        if (!$this->newInstanceModel instanceof Model)
+            throw new Exception("Class {$this->newInstanceModel} must be an instance of Illuminate\\Database\\Eloquent\\Model");
 
-        return $this->model = $this->newInstanseModel;
+        return $this->model = $this->newInstanceModel;
     }
 
     /**
