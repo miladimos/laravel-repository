@@ -147,7 +147,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      */
     public function firstOrCreate($attributes, $values)
     {
-        //
+        // return $this->firstOrCreate();
     }
 
     /**
@@ -165,7 +165,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      */
     public function max($column)
     {
-        return $this->modelQuery->max($column);
+        return $this->model->max($column);
     }
 
     /**
@@ -174,7 +174,16 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      */
     public function min($column)
     {
-        return $this->modelQuery->min($column);
+        return $this->model->min($column);
+    }
+
+    /**
+     * @param $column
+     * @return mixed
+     */
+    public function avg($column)
+    {
+        return $this->model->avg($column);
     }
 
     /**
@@ -214,7 +223,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      * @param $column
      * @return mixed
      */
-    public function paginate($perPage = 8, $columns = ['*'])
+    public function paginate($columns = ['*'], $perPage = 8)
     {
         return $this->model->paginate($perPage, $columns);
     }
@@ -232,7 +241,7 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
      * @param $column
      * @return mixed
      */
-    public function search($query, $columns = ["*"])
+    public function search(array $query, $columns = ["*"])
     {
         //
     }
@@ -254,15 +263,6 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     }
 
     /**
-     * @param $column
-     * @return mixed
-     */
-    public function toSql()
-    {
-        return $this->model->toSql();
-    }
-
-    /**
      * Eager load database relationships
      * @param $column
      * @return mixed
@@ -270,5 +270,14 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     public function with($relations)
     {
         return $this->model->with($relations);
+    }
+
+    /**
+     * @param $column
+     * @return mixed
+     */
+    public function toSql()
+    {
+        return $this->model->toSql();
     }
 }

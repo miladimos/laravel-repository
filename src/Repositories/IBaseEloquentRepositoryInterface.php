@@ -39,21 +39,23 @@ interface IBaseEloquentRepositoryInterface
 
     public function min($column);
 
+    public function avg($column);
+
     public function delete(int $id);
 
     public function truncate();
 
     public function count(): int;
 
-    public function paginate($perPage = 8, $columns = ['*']);
+    public function paginate($columns = ['*'], $perPage = 8);
 
     public function simplePaginate($limit = null, $columns = ['*']);
 
-    public function search($query, $columns = ["*"]);
+    public function search(array $query, $columns = ["*"]);
 
     public function pluck($value, $key = null);
 
-    public function toSql();
-
     public function with($relations);
+
+    public function toSql();
 }
