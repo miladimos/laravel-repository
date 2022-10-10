@@ -89,5 +89,49 @@ App\Providers\RepositoryServiceProvider::class,
 #### Methods:
 
 ```php
+$model->all($columns = ['*']);
+
+$model->create(array $data);
+
+$model->update(array $data, $id, $attribute = "id");
+
+$model->find($id);
+
+$model->findOrFail($id);
+
+$model->findWhere(string $field, $condition, $columns);
+
+$model->first();
+
+$model->last();
+
+$model->firstOrCreate();
+
+$model->whereIn($attribute, array $values);
+
+$model->max($column);
+
+$model->min($column);
+
+$model->avg($column);
+
+$model->delete($id);
+
+$model->truncate();
+
+$model->count($columns = ['*']);
+
+$model->paginate($columns = ['*'], $perPage = 8);
+
+$model->simplePaginate($limit = null, $columns = ['*']);
+
+$model->search(array $query, $columns = ["*"]);
+
+$model->pluck($value, $key = null);
+
+$model->with($relations);
+
+$model->toSql();
+
 
 ```
