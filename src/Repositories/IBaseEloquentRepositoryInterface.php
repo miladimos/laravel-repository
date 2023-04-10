@@ -27,9 +27,9 @@ interface IBaseEloquentRepositoryInterface
 
     public function last(): object;
 
-    public function next(): object;
+    public function next($id): object;
 
-    public function before(): object;
+    public function before($id): object;
 
     public function firstOrCreate(array $attributes, array $values);
 

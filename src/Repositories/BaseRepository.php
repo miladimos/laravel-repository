@@ -3,7 +3,6 @@
 namespace Miladimos\Repository\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
-use Miladimos\Repository\Repositories\IBaseEloquentRepositoryInterface;
 use Exception;
 
 abstract class BaseRepository implements IBaseEloquentRepositoryInterface
@@ -139,6 +138,22 @@ abstract class BaseRepository implements IBaseEloquentRepositoryInterface
     public function last(): object
     {
         return $this->model->latest()->first();
+    }
+
+    /**
+     * @param $column
+     * @return mixed
+     */ public function next($id): object
+    {
+        return $this->model->where('id', '>', $id)->orderBy('id')->first();
+    }
+
+    /**
+     * @param $column
+     * @return mixed
+     */ public function before($id): object
+    {
+        return $this->model->where('id', '<', $id)->orderBy('id', 'desc')->first();
     }
 
     /**

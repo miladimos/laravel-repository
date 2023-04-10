@@ -3,6 +3,7 @@
     "description": "a powerful and simple to use package for repository pattern",
     "homepage": "https://github.com/miladimos/laravel-repository",
     "type": "library",
+    "version": "0.8.6",
     "keywords": [
         "laravel",
         "laravel-package",

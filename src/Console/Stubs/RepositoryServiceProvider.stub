@@ -10,9 +10,9 @@ class {{ $providerName }} extends ServiceProvider
     /**
     * define your repositories here
     */
-    protected $repositories = [
+    protected array $repositories = [
         [
-            ModelRepositoryInterface::class,
+            ModelEloquentRepositoryInterface::class,
             ModelRepository::class
         ],
     ];
