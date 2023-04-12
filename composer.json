@@ -3,7 +3,7 @@
     "description": "a powerful and simple to use package for repository pattern",
     "homepage": "https://github.com/miladimos/laravel-repository",
     "type": "library",
-    "version": "0.8.6",
+    "version": "0.8.8",
     "keywords": [
         "laravel",
         "laravel-package",
@@ -45,12 +45,7 @@
         }
     },
     "require": {
-        "php": ">=7.4",
-        "illuminate/support": "^7|^8"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.3",
-        "orchestra/testbench": "^v5.5.0"
+        "php": ">=7.4|^8.0"
     },
     "scripts": {
         "post-package-update": [
