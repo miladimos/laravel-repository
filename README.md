@@ -15,7 +15,7 @@
 
 ### Example:
 
-`php php artisan make:repository Tag`
+`php artisan make:repository Tag`
 
 this create a TagRepository and TagEloquentRepositoryInterface
 
