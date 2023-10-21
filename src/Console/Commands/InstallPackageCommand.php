@@ -49,7 +49,6 @@ class InstallPackageCommand extends Command
             $this->publishStubs();
             $this->info("stub files published!");
         } else {
-            $this->error("you must publish and overwrite stubs file");
             die;
         }
 

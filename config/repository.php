@@ -45,4 +45,9 @@ return [
      *
      */
     'interfaces_suffix' => 'Interface',
+
+
+    'caching' => [
+        'enabled' => false,
+    ]
 ];
